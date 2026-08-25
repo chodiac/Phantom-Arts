@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PHANTOM ARTS — Kreativni digitalni studio</title>
+<meta name="description" content="PHANTOM ARTS je kreativni digitalni studio. Web dizajn, društvene mreže, grafički dizajn i brendiranje." />
+
+<!-- PLACEHOLDER: replace with real favicon -->
+<link rel="icon" href="data:,">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Manrope:wght@300..800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ NOISE / GRAIN OVERLAY ============ -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ============ CUSTOM CURSOR ============ -->
+<div class="cursor" id="cursor" aria-hidden="true">
+  <span class="cursor__text" id="cursorText"></span>
+</div>
+
+<!-- ============ LOADER ============ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__mark">
+    <span class="loader__word" data-word="phantom">PHANTOM</span>
+    <span class="loader__word" data-word="arts">ARTS</span>
+  </div>
+  <div class="loader__count" id="loaderCount">00</div>
+  <div class="loader__bar"><span id="loaderFill"></span></div>
+</div>
+
+<!-- ============ NAVIGATION ============ -->
+<header class="nav" id="siteNav">
+  <a href="#top" class="nav__logo" id="navLogo" data-easter="0">PHANTOM<span>ARTS</span></a>
+  <nav class="nav__links" aria-label="Glavna navigacija">
+    <a href="#radovi">Radovi</a>
+    <a href="#usluge">Usluge</a>
+    <a href="#studio">Studio</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+  <a href="#kontakt" class="nav__cta">Pokreni projekat <span>↗</span></a>
+  <button class="nav__burger" id="navBurger" aria-label="Otvori meni" aria-expanded="false">
+    <span></span><span></span>
+  </button>
+</header>
+
+<!-- mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#radovi">Radovi</a>
+  <a href="#usluge">Usluge</a>
+  <a href="#studio">Studio</a>
+  <a href="#kontakt">Kontakt</a>
+</div>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <div class="hero__canvas-wrap" id="heroCanvasWrap">
+      <canvas id="heroCanvas"></canvas>
+    </div>
+
+    <div class="hero__grid">
+      <p class="hero__eyebrow">
+        <span class="dot"></span> DOSTUPNI ZA NOVE PROJEKTE
+      </p>
+
+      <h1 class="hero__title" id="heroTitle">
+        <span class="line" data-line>WE CREATE</span>
+        <span class="line" data-line>DIGITAL</span>
+        <span class="line accent" data-line>PRESENCE.</span>
+      </h1>
+
+      <p class="hero__sub">Web. Social. Design.</p>
+      <p class="hero__sr">Gradimo digitalne identitete koje ljudi pamte.</p>
+
+      <div class="hero__ctas">
+        <a href="#kontakt" class="btn btn--filled">POKRENI PROJEKAT <span>↗</span></a>
+        <a href="#radovi" class="btn btn--ghost">POGLEDAJ RADOVE</a>
+      </div>
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true">
+      <span>SKROLUJ</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+
+    <div class="hero__coords" aria-hidden="true">44.8N / 20.4E — BEOGRAD</div>
+  </section>
+
+  <!-- ============ INTRO STATEMENT ============ -->
+  <section class="intro" id="intro">
+    <div class="intro__num">01 / 08</div>
+    <h2 class="intro__title">
+      <span class="reveal-line">NE PRAVIMO</span>
+      <span class="reveal-line">SAMO SAJTOVE.</span>
+    </h2>
+    <h3 class="intro__title intro__title--sub">
+      <span class="reveal-line">GRADIMO DIGITALNI</span>
+      <span class="reveal-line">IDENTITET BRENDA.</span>
+    </h3>
+    <p class="intro__body">
+      Spajamo dizajn, tehnologiju i sadržaj kako bismo napravili brendove koji izgledaju dobro,
+      funkcionišu bolje i ostaju zapamćeni.
+    </p>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="services" id="usluge">
+    <div class="section-head">
+      <div class="intro__num">02 / 08</div>
+      <h2 class="section-head__title">USLUGE</h2>
+    </div>
+
+    <div class="services__list" id="servicesList">
+      <div class="service-row" data-preview="web">
+        <span class="service-row__num">01</span>
+        <span class="service-row__name">WEB DESIGN &amp; DEVELOPMENT</span>
+        <span class="service-row__arrow">↗</span>
+      </div>
+      <div class="service-row" data-preview="social">
+        <span class="service-row__num">02</span>
+        <span class="service-row__name">SOCIAL MEDIA</span>
+        <span class="service-row__arrow">↗</span>
+      </div>
+      <div class="service-row" data-preview="graphic">
+        <span class="service-row__num">03</span>
+        <span class="service-row__name">GRAPHIC DESIGN &amp; BRANDING</span>
+        <span class="service-row__arrow">↗</span>
+      </div>
+      <div class="service-row" data-preview="content">
+        <span class="service-row__num">04</span>
+        <span class="service-row__name">CONTENT CREATION</span>
+        <span class="service-row__arrow">↗</span>
+      </div>
+    </div>
+
+    <div class="services__preview" id="servicesPreview" aria-hidden="true">
+      <div class="preview preview--web" data-preview-panel="web">
+        <div class="preview__browser">
+          <div class="preview__dots"><span></span><span></span><span></span></div>
+          <div class="preview__lines">
+            <div></div><div></div><div class="short"></div>
+          </div>
+        </div>
+      </div>
+      <div class="preview preview--social" data-preview-panel="social">
+        <div class="preview__frame f1"></div>
+        <div class="preview__frame f2"></div>
+        <div class="preview__frame f3"></div>
+      </div>
+      <div class="preview preview--graphic" data-preview-panel="graphic">
+        <span class="preview__glyph">Aa</span>
+        <span class="preview__glyph small">Bb</span>
+      </div>
+      <div class="preview preview--content" data-preview-panel="content">
+        <div class="preview__reel"></div>
+      </div>
+    </div>
+
+    <!-- expanded detail panels for mobile / click -->
+    <div class="services__details">
+      <p class="service-detail" data-detail="web">Sajtovi i digitalni proizvodi koji spajaju formu i funkciju — od portfolija do kompleksnih platformi.</p>
+      <p class="service-detail" data-detail="social">Strategija, kalendar i kreativna produkcija za profile koji zaista rastu.</p>
+      <p class="service-detail" data-detail="graphic">Vizuelni identiteti, logotipi i grafička rešenja koja nose brend dosledno svuda.</p>
+      <p class="service-detail" data-detail="content">Foto, video i tekstualni sadržaj napravljen da se zaustavi skrol.</p>
+    </div>
+  </section>
+
+  <!-- ============ SELECTED WORK ============ -->
+  <section class="work" id="radovi">
+    <div class="section-head">
+      <div class="intro__num">03 / 08</div>
+      <h2 class="section-head__title">ODABRANI RADOVI</h2>
+    </div>
+
+    <div class="work__list">
+      <article class="work-item" data-work="1">
+        <div class="work-item__visual">
+          <!-- PLACEHOLDER: replace with real project screenshot/video -->
+          <div class="work-item__placeholder ph-1"></div>
+        </div>
+        <div class="work-item__meta">
+          <h3 class="work-item__title">GIGA CENTAR</h3>
+          <p class="work-item__cat">Web Design &amp; Development — 2026</p>
+        </div>
+      </article>
+
+      <article class="work-item work-item--right" data-work="2">
+        <div class="work-item__visual">
+          <div class="work-item__placeholder ph-2"></div>
+        </div>
+        <div class="work-item__meta">
+          <h3 class="work-item__title">VILA RADOVANJE</h3>
+          <p class="work-item__cat">Web Design — 2026</p>
+        </div>
+      </article>
+
+      <article class="work-item" data-work="3">
+        <div class="work-item__visual">
+          <div class="work-item__placeholder ph-3"></div>
+        </div>
+        <div class="work-item__meta">
+          <h3 class="work-item__title">BRAND IDENTITY 01</h3>
+          <p class="work-item__cat">Graphic Design — 2026</p>
+        </div>
+      </article>
+
+      <article class="work-item work-item--right" data-work="4">
+        <div class="work-item__visual">
+          <div class="work-item__placeholder ph-4"></div>
+        </div>
+        <div class="work-item__meta">
+          <h3 class="work-item__title">SOCIAL CAMPAIGN 01</h3>
+          <p class="work-item__cat">Social Media — 2026</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ SCROLL STORY / 3D TRANSITION ============ -->
+  <section class="storysplit" id="storysplit">
+    <div class="storysplit__pin">
+      <canvas id="storyCanvas"></canvas>
+      <div class="storysplit__word" data-word="WEB">WEB</div>
+      <div class="storysplit__word" data-word="SOCIAL">SOCIAL</div>
+      <div class="storysplit__word" data-word="DESIGN">DESIGN</div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee" id="marquee">
+    <div class="marquee__track" id="marqueeTrack">
+      <span>WEB DESIGN — SOCIAL MEDIA — GRAPHIC DESIGN — BRANDING — CONTENT — PHANTOM ARTS — </span>
+      <span>WEB DESIGN — SOCIAL MEDIA — GRAPHIC DESIGN — BRANDING — CONTENT — PHANTOM ARTS — </span>
+    </div>
+  </div>
+
+  <!-- ============ PHILOSOPHY ============ -->
+  <section class="philosophy" id="filozofija">
+    <div class="section-head">
+      <div class="intro__num">04 / 08</div>
+    </div>
+    <div class="philosophy__stack">
+      <div class="phil-word" data-phil="ideja">
+        <h2>IDEJA.</h2>
+        <p>Svaki dobar projekat počinje razumevanjem biznisa.</p>
+      </div>
+      <div class="phil-word" data-phil="dizajn">
+        <h2>DIZAJN.</h2>
+        <p>Vizuelni identitet koji komunicira pre nego što korisnik pročita prvu rečenicu.</p>
+      </div>
+      <div class="phil-word" data-phil="rezultat">
+        <h2>REZULTAT.</h2>
+        <p>Dizajn nije dekoracija. Njegov posao je da pokrene akciju.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROCESS ============ -->
+  <section class="process" id="proces">
+    <div class="section-head">
+      <div class="intro__num">05 / 08</div>
+      <h2 class="section-head__title">PROCES</h2>
+    </div>
+
+    <div class="process__timeline" id="processTimeline">
+      <div class="process__line"><span class="process__line-fill" id="processFill"></span></div>
+
+      <div class="process-step" data-step="1">
+        <span class="process-step__num">01</span>
+        <span class="process-step__name">UPOZNAVANJE</span>
+        <p class="process-step__desc">Razumevamo biznis, korisnike i ciljeve pre prve linije koda.</p>
+      </div>
+      <div class="process-step" data-step="2">
+        <span class="process-step__num">02</span>
+        <span class="process-step__name">STRATEGIJA</span>
+        <p class="process-step__desc">Definišemo pravac, poziciju i plan koji vodi ka rezultatu.</p>
+      </div>
+      <div class="process-step" data-step="3">
+        <span class="process-step__num">03</span>
+        <span class="process-step__name">KREACIJA</span>
+        <p class="process-step__desc">Dizajniramo i razvijamo — vizuelno i tehnički, paralelno.</p>
+      </div>
+      <div class="process-step" data-step="4">
+        <span class="process-step__num">04</span>
+        <span class="process-step__name">REALIZACIJA</span>
+        <p class="process-step__desc">Testiramo, finaliziramo i lansiramo bez kompromisa.</p>
+      </div>
+      <div class="process-step" data-step="5">
+        <span class="process-step__num">05</span>
+        <span class="process-step__name">RAST</span>
+        <p class="process-step__desc">Pratimo, unapređujemo i gradimo dalje zajedno sa brendom.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT / STUDIO ============ -->
+  <section class="about" id="studio">
+    <div class="section-head">
+      <div class="intro__num">06 / 08</div>
+      <h2 class="section-head__title">PHANTOM ARTS</h2>
+    </div>
+
+    <div class="about__grid">
+      <h3 class="about__statement">
+        KREATIVNI STUDIO<br>ZA DIGITALNO DOBA.
+      </h3>
+      <p class="about__body">
+        Phantom Arts je digitalni studio koji spaja dizajn, razvoj i komunikaciju u jednu celinu.
+        Radimo sa brendovima kojima je stalo do detalja — od prve ideje do sajta koji zaista radi
+        i sadržaja koji ostaje zapamćen.
+      </p>
+      <div class="about__disciplines">
+        <span>WEB</span>
+        <span>SOCIAL</span>
+        <span>DESIGN</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="contact" id="kontakt">
+    <div class="contact__intro">
+      <div class="intro__num">07 / 08</div>
+      <h2 class="contact__title">
+        <span class="reveal-line">IMATE IDEJU?</span>
+      </h2>
+      <h3 class="contact__title contact__title--sub">
+        <span class="reveal-line">HAJDE DA JE</span>
+        <span class="reveal-line">PRETVORIMO U NEŠTO.</span>
+      </h3>
+    </div>
+
+    <a href="#contactForm" class="magnetic-btn" id="magneticBtn">
+      <span>POKRENI<br>PROJEKAT ↗</span>
+    </a>
+
+    <form class="contact-form" id="contactForm" novalidate>
+      <div class="contact-form__row">
+        <div class="field">
+          <label for="f-ime">Ime</label>
+          <input type="text" id="f-ime" name="ime" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="f-kompanija">Kompanija</label>
+          <input type="text" id="f-kompanija" name="kompanija" autocomplete="organization">
+        </div>
+      </div>
+      <div class="contact-form__row">
+        <div class="field">
+          <label for="f-email">Email</label>
+          <input type="email" id="f-email" name="email" required autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="f-telefon">Telefon</label>
+          <input type="tel" id="f-telefon" name="telefon" autocomplete="tel">
+        </div>
+      </div>
+
+      <fieldset class="field-group">
+        <legend>Šta vam je potrebno?</legend>
+        <div class="chip-group" data-group="usluga">
+          <button type="button" class="chip" data-value="Web sajt">Web sajt</button>
+          <button type="button" class="chip" data-value="Društvene mreže">Društvene mreže</button>
+          <button type="button" class="chip" data-value="Grafički dizajn">Grafički dizajn</button>
+          <button type="button" class="chip" data-value="Branding">Branding</button>
+          <button type="button" class="chip" data-value="Više usluga">Više usluga</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="field-group">
+        <legend>Budžet</legend>
+        <div class="chip-group" data-group="budzet">
+          <button type="button" class="chip" data-value="Do 500 €">Do 500 €</button>
+          <button type="button" class="chip" data-value="500–1.000 €">500–1.000 €</button>
+          <button type="button" class="chip" data-value="1.000–2.500 €">1.000–2.500 €</button>
+          <button type="button" class="chip" data-value="2.500 €+">2.500 €+</button>
+        </div>
+      </fieldset>
+
+      <div class="field">
+        <label for="f-poruka">Poruka</label>
+        <textarea id="f-poruka" name="poruka" rows="4"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn--filled contact-form__submit">
+        POŠALJI UPIT <span>↗</span>
+      </button>
+      <p class="contact-form__status" id="formStatus" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer__top">
+    <a href="#top" class="footer__logo" id="footerLogo">
+      <span>P</span><span>H</span><span>A</span><span>N</span><span>T</span><span>O</span><span>M</span>&nbsp;<span>A</span><span>R</span><span>T</span><span>S</span>
+    </a>
+  </div>
+  <div class="footer__grid">
+    <div class="footer__col">
+      <span class="footer__label">Usluge</span>
+      <a href="#usluge">Web Design</a>
+      <a href="#usluge">Social Media</a>
+      <a href="#usluge">Graphic Design</a>
+    </div>
+    <div class="footer__col">
+      <span class="footer__label">Kontakt</span>
+      <!-- PLACEHOLDER: replace with real social + email links -->
+      <a href="#" target="_blank" rel="noopener">Instagram</a>
+      <a href="mailto:hello@phantomarts.rs">Email</a>
+    </div>
+    <div class="footer__col">
+      <span class="footer__label">Lokacija</span>
+      <span>Srbija / Dostupni svuda u svetu</span>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© <span id="year"></span> Phantom Arts</span>
+    <span class="footer__status">● AVAILABLE FOR PROJECTS</span>
+  </div>
+</footer>
+
+<!-- ============ SCRIPTS ============ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="three-scene.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

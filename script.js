@@ -56,8 +56,17 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         onComplete: () => {
           const tl = gsap.timeline({ onComplete: resolve });
-          tl.to('.loader__word[data-word="phantom"]', { x: -14, duration: 0.5, ease: 'power3.inOut' }, 0)
-            .to('.loader__word[data-word="arts"]', { x: 14, duration: 0.5, ease: 'power3.inOut' }, 0)
+          tl.to('.loader__word[data-word="flow"]', {
+  x: -14,
+  duration: 0.5,
+  ease: 'power3.inOut'
+}, 0)
+
+.to('.loader__word[data-word="state"]', {
+  x: 14,
+  duration: 0.5,
+  ease: 'power3.inOut'
+}, 0)
             .to(loader, { opacity: 0, duration: 0.6, ease: 'power2.out' }, 0.25)
             .set(loader, { display: 'none' });
         },
@@ -71,16 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const cursor = document.getElementById('cursor');
   const cursorText = document.getElementById('cursorText');
 
-  if (!IS_TOUCH) {
-    let cx = window.innerWidth / 2, cy = window.innerHeight / 2;
-    let tx = cx, ty = cy;
-    window.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; });
+if (!IS_TOUCH) {
 
-    gsap.ticker.add(() => {
-      cx += (tx - cx) * 0.18;
-      cy += (ty - cy) * 0.18;
-      cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%,-50%)`;
-    });
+  window.addEventListener('mousemove', (e) => {
+    cursor.style.transform =
+      `translate(${e.clientX}px, ${e.clientY}px) translate(-50%,-50%)`;
+  });
 
     const expandTargets = document.querySelectorAll('a, button, .service-row, .work-item, input, textarea');
     expandTargets.forEach((el) => {

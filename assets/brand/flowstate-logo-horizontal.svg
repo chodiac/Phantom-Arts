@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 240" role="img" aria-labelledby="title">
+  <title id="title">FLOWSTATE horizontal logo</title>
+  <g fill="#F7F8FA" font-family="Michroma, Orbitron, Eurostile, Arial, sans-serif" font-size="154" font-weight="300" letter-spacing="8">
+    <text x="20" y="174">FL</text>
+    <text x="500" y="174">WSTATE</text>
+  </g>
+  <g fill="none" stroke="#2D5BFF" stroke-width="15" stroke-linecap="round">
+    <path d="M399 92C360 73 322 65 279 79C250 89 229 88 208 77"/>
+    <path d="M401 111C362 99 327 100 289 116C260 129 237 129 211 117"/>
+    <path d="M401 131C364 131 334 144 302 161C272 176 245 175 216 161"/>
+    <path d="M402 151C369 161 345 181 316 193C284 207 256 202 230 186"/>
+  </g>
+  <path fill="#F7F8FA" d="M398 48C468 48 508 82 508 127C508 172 468 206 398 206C418 184 428 157 428 127C428 97 418 70 398 48Z"/>
+  <path fill="#080A0E" d="M407 115C426 109 445 109 463 114C472 116 476 121 476 127C476 133 472 138 463 140C445 145 426 145 407 139C410 131 410 123 407 115Z"/>
+</svg>

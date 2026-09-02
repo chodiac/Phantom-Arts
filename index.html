@@ -1,461 +1,681 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="sr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>FLOWSTATE — Kreativni digitalni studio</title>
-<meta
-  name="description"
-  content="FLOWSTATE je kreativni digitalni studio za web dizajn, društvene mreže, grafički dizajn i brending."
-/>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FLOWSTATE — Od ideje do digitalnog toka</title>
+<meta name="description" content="FLOWSTATE je kreativni digitalni studio iz Srbije. Strategiju, dizajn, razvoj i sadržaj spajamo u jedan neprekidan tok — digitalni identitet koji se pamti." />
 
-<!-- PLACEHOLDER: replace with real favicon -->
-<link rel="icon" href="data:,">
+<link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="assets/brand/favicon.ico" sizes="any" />
+<link rel="icon" href="assets/brand/favicon-32x32.png" sizes="32x32" type="image/png" />
+<link rel="icon" href="assets/brand/favicon-16x16.png" sizes="16x16" type="image/png" />
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
+<link rel="mask-icon" href="assets/brand/safari-pinned-tab.svg" color="#2D5BFF" />
+<link rel="manifest" href="assets/brand/site.webmanifest" />
+<meta name="theme-color" content="#080A0E" />
+<meta property="og:title" content="FLOWSTATE — Od ideje do digitalnog toka" />
+<meta property="og:description" content="Strategiju, dizajn, razvoj i sadržaj spajamo u jedan neprekidan tok." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="assets/brand/flowstate-og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="assets/brand/flowstate-og-image.png" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Manrope:wght@300..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="assets/css/main.css" />
 </head>
-<body>
-
-<!-- ============ NOISE / GRAIN OVERLAY ============ -->
-<div class="grain" aria-hidden="true"></div>
-
-<!-- ============ CUSTOM CURSOR ============ -->
-<div class="cursor" id="cursor" aria-hidden="true">
-  <span class="cursor__text" id="cursorText"></span>
-</div>
+<body class="theme-dark is-loading">
 
 <!-- ============ LOADER ============ -->
 <div class="loader" id="loader" aria-hidden="true">
- <div class="loader__mark">
-  <span class="loader__word" data-word="flow">FLOW</span>
-  <span class="loader__word" data-word="state">STATE</span>
-</div>
-  <div class="loader__count" id="loaderCount">00</div>
-  <div class="loader__bar"><span id="loaderFill"></span></div>
+  <div class="loader__inner">
+    <img class="loader__logo" src="assets/brand/flowstate-logo-horizontal.png" alt="FLOWSTATE" />
+    <span class="loader__count" data-count>00</span>
+  </div>
+  <div class="loader__bar"><span data-loader-fill></span></div>
 </div>
 
-<!-- ============ NAVIGATION ============ -->
-<header class="nav" id="siteNav">
-  <a href="#top" class="nav__logo" id="navLogo" data-easter="0">
-  FLOW<span>STATE</span>
-</a>
+<!-- ============ CURSOR ============ -->
+<div class="cursor" id="cursor" aria-hidden="true">
+  <span class="cursor__dot"></span>
+  <span class="cursor__label">VIDI</span>
+</div>
+
+<!-- ============ SCROLL PROGRESS ============ -->
+<div class="progress" aria-hidden="true"><span data-progress></span></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <a class="nav__brand" href="#top" data-magnetic aria-label="FLOWSTATE — početna">
+    <img class="nav__logo" src="assets/brand/flowstate-logo-horizontal.png" alt="FLOWSTATE" />
+  </a>
+
   <nav class="nav__links" aria-label="Glavna navigacija">
-    <a href="#radovi">Radovi</a>
-    <a href="#usluge">Usluge</a>
-    <a href="#studio">Studio</a>
-    <a href="#kontakt">Kontakt</a>
+    <a href="#work"><span>Radovi</span></a>
+    <a href="#capabilities"><span>Usluge</span></a>
+    <a href="#social"><span>Mreže</span></a>
+    <a href="#process"><span>Proces</span></a>
+    <a href="#studio"><span>Studio</span></a>
+    <a href="#contact"><span>Kontakt</span></a>
   </nav>
-  <a href="#kontakt" class="nav__cta">Pokreni projekat <span>↗</span></a>
-  <button class="nav__burger" id="navBurger" aria-label="Otvori meni" aria-expanded="false">
+
+  
+
+  <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="menu">
     <span></span><span></span>
+    <span class="nav__toggle-txt">MENI</span>
   </button>
 </header>
 
-<!-- mobile menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#radovi">Radovi</a>
-  <a href="#usluge">Usluge</a>
-  <a href="#studio">Studio</a>
-  <a href="#kontakt">Kontakt</a>
+<!-- ============ MOBILE MENU ============ -->
+<div class="menu" id="menu" aria-hidden="true">
+  <nav class="menu__links">
+    <a href="#work"><i>01</i><span>Radovi</span></a>
+    <a href="#capabilities"><i>02</i><span>Usluge</span></a>
+    <a href="#social"><i>03</i><span>Mreže</span></a>
+    <a href="#process"><i>04</i><span>Proces</span></a>
+    <a href="#studio"><i>05</i><span>Studio</span></a>
+    <a href="#contact"><i>06</i><span>Kontakt</span></a>
+  </nav>
+  <div class="menu__foot">
+    <span>SRBIJA — DOSTUPNI ŠIROM SVETA</span>
+    <a href="#" data-placeholder>Instagram</a>
+    <a href="#" data-placeholder>Facebook</a>
+    <a href="#" data-placeholder>TikTok</a>
+  </div>
 </div>
 
 <main id="top">
 
-  <!-- ============ HERO ============ -->
+  <!-- ==================================================================
+       HERO  +  fullscreen video -> square
+  =================================================================== -->
   <section class="hero" id="hero">
-    <div class="hero__canvas-wrap" id="heroCanvasWrap">
-      <canvas id="heroCanvas"></canvas>
-    </div>
+    <div class="hero__pin" data-hero-pin>
 
-    <div class="hero__grid">
-      <p class="hero__eyebrow">
-        <span class="dot"></span> DOSTUPNI ZA NOVE PROJEKTE
-      </p>
+      <!-- jedini medijski element. fiksiran tokom scene, pa predat u
+           rezervisani slot sekcije 01. -->
+      <div class="hero-media" id="heroMedia" data-hero-media>
+        <div class="hero-media__ph" id="heroPh">
+          <div class="hero-media__grid" aria-hidden="true"></div>
+          <div class="hero-media__scan" aria-hidden="true"></div>
+        
+          <span class="hero-media__coord" data-coord>[ 00.00 / 00.00 ]</span>
+        </div>
+        <div class="hero-media__frameline" aria-hidden="true">
+          <span>REC</span><span data-runtime>00:00:00</span><span>16:9 → 1:1</span>
+        </div>
+      </div>
 
-      <h1 class="hero__title" id="heroTitle">
-        <span class="line" data-line>WE CREATE</span>
-        <span class="line" data-line>DIGITAL</span>
-        <span class="line accent" data-line>PRESENCE.</span>
-      </h1>
+      <!-- hero tekst -->
+      <div class="hero__copy">
+        <div class="hero__eyebrow reveal-line"><span>OD IDEJE DO DIGITALNOG TOKA</span></div>
 
-      <p class="hero__sub">Web. Social. Design.</p>
-      <p class="hero__sr">Gradimo digitalne identitete koje ljudi pamte.</p>
+        <h1 class="hero__title">
+          <span class="line"><span class="w" data-split="L">IDEJA</span> <span class="w" data-split="R">UĐE,</span></span>
+          <span class="line"><span class="w" data-split="L">A IZAĐE</span> <span class="w" data-split="R">CEO</span></span>
+          <span class="line"><span class="w" data-split="C">TOK.</span></span>
+        </h1>
 
-      <div class="hero__ctas">
-        <a href="#kontakt" class="btn btn--filled">POKRENI PROJEKAT <span>↗</span></a>
-        <a href="#radovi" class="btn btn--ghost">POGLEDAJ RADOVE</a>
+        <div class="hero__meta">
+          <p class="hero__lede reveal-line"><span>FLOWSTATE spaja strategiju, dizajn, razvoj i sadržaj u jedan neprekidan tok — digitalni identitet koji se pamti.</span></p>
+          <div class="hero__tags reveal-line">
+            <span>WEB</span><i>/</i><span>DIZAJN</span><i>/</i><span>KOD</span><i>/</i><span>MREŽE</span>
+          </div>
+          <div class="hero__cta reveal-line">
+            <a class="btn btn--fill" href="#contact" data-magnetic>POKRENI PROJEKAT</a>
+            <a class="btn btn--line" href="#work" data-magnetic>POGLEDAJ RADOVE</a>
+          </div>
+          <div class="hero__status">
+            <span class="dot"></span> DOSTUPNI ZA NOVE PROJEKTE
+          </div>
+        </div>
+
+        <div class="hero__scroll" aria-hidden="true">
+          <span>SKROLUJ</span><i></i>
+        </div>
       </div>
     </div>
-
-    <div class="hero__scroll" aria-hidden="true">
-      <span>SKROLUJ</span>
-      <div class="hero__scroll-line"></div>
-    </div>
-
-    
   </section>
 
-  <!-- ============ INTRO STATEMENT ============ -->
-  <section class="intro" id="intro">
-    <div class="intro__num">01 / 08</div>
-    <h2 class="intro__title">
-      <span class="reveal-line">NE PRAVIMO</span>
-      <span class="reveal-line">SAMO SAJTOVE.</span>
-    </h2>
-    <h3 class="intro__title intro__title--sub">
-      <span class="reveal-line">GRADIMO DIGITALNI</span>
-      <span class="reveal-line">IDENTITET BRENDA.</span>
-    </h3>
-    <p class="intro__body">
-      Spajamo dizajn, tehnologiju i sadržaj kako bismo napravili brendove koji izgledaju dobro,
-      funkcionišu bolje i ostaju zapamćeni.
-    </p>
+  <!-- ==================================================================
+       01  STUDIO
+  =================================================================== -->
+  <section class="studio section section--dark" id="studio" data-theme="dark">
+    <div class="section__index">
+      <span class="idx">01</span><span class="idx-label">FLOWSTATE</span>
+    </div>
+
+    <div class="studio__grid grid">
+      <div class="studio__media">
+        <!-- rezervisani slot: hero video sleće ovde -->
+        <div class="hero-media__slot" id="heroSlot" data-hero-slot></div>
+        <ul class="studio__orbit reveal">
+          <li>STRATEGIJA</li><li>INTERFEJS</li><li>RAZVOJ</li><li>SADRŽAJ</li><li>RAST</li>
+        </ul>
+      </div>
+
+      <div class="studio__text">
+        <h2 class="studio__headline">
+          <span>NE PRAVIMO</span>
+          <span>SAMO SAJTOVE.</span>
+          <span class="is-signal">GRADIMO CEO DIGITALNI</span>
+          <span class="is-signal">TOK BRENDA.</span>
+        </h2>
+        <p class="studio__body reveal">FLOWSTATE povezuje strategiju, dizajn, razvoj i komunikaciju u jedno neprekidno digitalno iskustvo.</p>
+        <dl class="studio__facts reveal">
+          <div><dt>BAZA</dt><dd>Srbija</dd></div>
+          <div><dt>DOMET</dt><dd>Ceo svet</dd></div>
+          <div><dt>TOK</dt><dd>Strategija → Dizajn → Kod → Sadržaj</dd></div>
+        </dl>
+      </div>
+    </div>
   </section>
 
-  <!-- ============ SERVICES ============ -->
-  <section class="services" id="usluge">
-    <div class="section-head">
-      <div class="intro__num">02 / 08</div>
-      <h2 class="section-head__title">USLUGE</h2>
+  <!-- ==================================================================
+       02  USLUGE  (svetla sekcija)
+  =================================================================== -->
+  <section class="cap section section--light" id="capabilities" data-theme="light">
+    <div class="section__index">
+      <span class="idx">02</span><span class="idx-label">USLUGE</span>
     </div>
 
-    <div class="services__list" id="servicesList">
-      <div class="service-row" data-preview="web">
-        <span class="service-row__num">01</span>
-        <span class="service-row__name">WEB DESIGN &amp; DEVELOPMENT</span>
-        <span class="service-row__arrow">↗</span>
-      </div>
-      <div class="service-row" data-preview="social">
-        <span class="service-row__num">02</span>
-        <span class="service-row__name">SOCIAL MEDIA</span>
-        <span class="service-row__arrow">↗</span>
-      </div>
-      <div class="service-row" data-preview="graphic">
-        <span class="service-row__num">03</span>
-        <span class="service-row__name">GRAPHIC DESIGN &amp; BRANDING</span>
-        <span class="service-row__arrow">↗</span>
-      </div>
-      <div class="service-row" data-preview="content">
-        <span class="service-row__num">04</span>
-        <span class="service-row__name">CONTENT CREATION</span>
-        <span class="service-row__arrow">↗</span>
-      </div>
+    <div class="cap__head grid">
+      <h2 class="cap__title">
+        <span>SVAKI SLOJ</span>
+        <span>VAŠEG DIGITALNOG</span>
+        <span>PRISUSTVA.</span>
+      </h2>
+      <p class="cap__note">Sedam disciplina, jedan tok. Otvori sloj i vidi kako nastaje.</p>
     </div>
 
-    <div class="services__preview" id="servicesPreview" aria-hidden="true">
-      <div class="preview preview--web" data-preview-panel="web">
-        <div class="preview__browser">
-          <div class="preview__dots"><span></span><span></span><span></span></div>
-          <div class="preview__lines">
-            <div></div><div></div><div class="short"></div>
+    <div class="cap__body">
+      <div class="cap__list" data-cap-list>
+        <button class="cap__row is-active" data-cap="web" aria-expanded="true">
+          <span class="cap__no">01</span>
+          <span class="cap__name">Web dizajn i razvoj</span>
+          <span class="cap__desc">Moderni sajtovi i digitalni proizvodi po meri — originalan dizajn, brzina, funkcija i responsivan razvoj.</span>
+          <span class="cap__mark">↗</span>
+        </button>
+        <button class="cap__row" data-cap="uiux" aria-expanded="false">
+          <span class="cap__no">02</span>
+          <span class="cap__name">UI/UX dizajn</span>
+          <span class="cap__desc">Jasni, intuitivni interfejsi zasnovani na strukturi, korisničkom iskustvu i vizuelnoj doslednosti.</span>
+          <span class="cap__mark">↗</span>
+        </button>
+        <button class="cap__row" data-cap="interactive" aria-expanded="false">
+          <span class="cap__no">03</span>
+          <span class="cap__name">Interaktivna web iskustva</span>
+          <span class="cap__desc">Scroll animacije, motion dizajn, WebGL i interakcije koje sajt pretvaraju u iskustvo.</span>
+          <span class="cap__mark">↗</span>
+        </button>
+        <button class="cap__row" data-cap="branding" aria-expanded="false">
+          <span class="cap__no">04</span>
+          <span class="cap__name">Brending i grafički dizajn</span>
+          <span class="cap__desc">Logotipi, tipografija, vizuelni identiteti i grafički sistemi koji brendu daju prepoznatljivo lice.</span>
+          <span class="cap__mark">↗</span>
+        </button>
+        <button class="cap__row" data-cap="smm" aria-expanded="false">
+          <span class="cap__no">05</span>
+          <span class="cap__name">Vođenje društvenih mreža</span>
+          <span class="cap__desc">Strategija, planiranje, vođenje profila i dosledna komunikacija brenda na mrežama.</span>
+          <span class="cap__mark">↗</span>
+        </button>
+        <button class="cap__row" data-cap="smd" aria-expanded="false">
+          <span class="cap__no">06</span>
+          <span class="cap__name">Dizajn za društvene mreže</span>
+          <span class="cap__desc">Objave, carousel, story formati, oglasi, cover slike i vizuelni sistemi za Instagram, Facebook i TikTok.</span>
+          <span class="cap__mark">↗</span>
+        </button>
+        <button class="cap__row" data-cap="content" aria-expanded="false">
+          <span class="cap__no">07</span>
+          <span class="cap__name">Kreiranje sadržaja</span>
+          <span class="cap__desc">Kreativni koncepti, tekst, fotografija, kratki video, Reels i kampanje napravljene da zadrže pažnju.</span>
+          <span class="cap__mark">↗</span>
+        </button>
+      </div>
+
+      <!-- scena: jedna po aktivnom redu -->
+      <div class="cap__stage" data-cap-stage aria-hidden="true">
+        <div class="scene is-active" data-scene="web">
+          <div class="scene__label">SKICA → SAJT</div>
+          <div class="mini-browser">
+            <div class="mini-browser__bar"><i></i><i></i><i></i><span>flowstate.build</span></div>
+            <div class="mini-browser__view">
+              <span class="wf wf--h"></span><span class="wf wf--a"></span><span class="wf wf--b"></span>
+              <span class="wf wf--c"></span><span class="wf wf--d"></span>
+            </div>
+          </div>
+        </div>
+        <div class="scene" data-scene="uiux">
+          <div class="scene__label">KOMPONENTE → INTERFEJS</div>
+          <div class="ui-stack">
+            <span class="uc uc--1"></span><span class="uc uc--2"></span>
+            <span class="uc uc--3"></span><span class="uc uc--4"></span>
+          </div>
+        </div>
+        <div class="scene" data-scene="interactive">
+          <div class="scene__label">SCROLL · MOTION · WEBGL</div>
+          <div class="ix-field"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="scene" data-scene="branding">
+          <div class="scene__label">ZNAK · PALETA · TIP</div>
+          <div class="brand-sys">
+            <img class="bmark" src="assets/brand/flowstate-medusa.png" alt="" />
+            <span class="sw sw--1"></span><span class="sw sw--2"></span><span class="sw sw--3"></span>
+            <span class="btype">Aa</span>
+          </div>
+        </div>
+        <div class="scene" data-scene="smm">
+          <div class="scene__label">KALENDAR SADRŽAJA</div>
+          <div class="cal">
+            <b></b><b></b><b></b><b></b><b></b><b></b><b></b>
+            <b></b><b></b><b></b><b></b><b></b><b></b><b></b>
+          </div>
+        </div>
+        <div class="scene" data-scene="smd">
+          <div class="scene__label">OBJAVE → FEED</div>
+          <div class="feed"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+        <div class="scene" data-scene="content">
+          <div class="scene__label">TIMELINE → REEL</div>
+          <div class="timeline">
+            <span class="tl-clip"></span><span class="tl-clip"></span><span class="tl-clip"></span>
+            <span class="tl-play">▶</span>
           </div>
         </div>
       </div>
-      <div class="preview preview--social" data-preview-panel="social">
-        <div class="preview__frame f1"></div>
-        <div class="preview__frame f2"></div>
-        <div class="preview__frame f3"></div>
-      </div>
-      <div class="preview preview--graphic" data-preview-panel="graphic">
-        <span class="preview__glyph">Aa</span>
-        <span class="preview__glyph small">Bb</span>
-      </div>
-      <div class="preview preview--content" data-preview-panel="content">
-        <div class="preview__reel"></div>
-      </div>
-    </div>
-
-    <!-- expanded detail panels for mobile / click -->
-    <div class="services__details">
-      <p class="service-detail" data-detail="web">Sajtovi i digitalni proizvodi koji spajaju formu i funkciju — od portfolija do kompleksnih platformi.</p>
-      <p class="service-detail" data-detail="social">Strategija, kalendar i kreativna produkcija za profile koji zaista rastu.</p>
-      <p class="service-detail" data-detail="graphic">Vizuelni identiteti, logotipi i grafička rešenja koja nose brend dosledno svuda.</p>
-      <p class="service-detail" data-detail="content">Foto, video i tekstualni sadržaj napravljen da se zaustavi skrol.</p>
     </div>
   </section>
 
-  <!-- ============ SELECTED WORK ============ -->
-  <section class="work" id="radovi">
-    <div class="section-head">
-      <div class="intro__num">03 / 08</div>
-      <h2 class="section-head__title">ODABRANI RADOVI</h2>
+  <!-- ==================================================================
+       03  SISTEMI ZA MREŽE — jedan identitet u svakom formatu
+  =================================================================== -->
+  <section class="social section section--dark" id="social" data-theme="dark">
+    <div class="section__index">
+      <span class="idx">03</span><span class="idx-label">SISTEMI ZA MREŽE</span>
+    </div>
+
+    <div class="social__pin" data-social-pin>
+      <div class="social__inner grid">
+
+        <div class="social__lead">
+          <h2 class="social__title">
+            <span>JEDAN BREND.</span>
+            <span class="is-signal">SVAKI EKRAN.</span>
+          </h2>
+          <p>Pravimo sisteme za društvene mreže koji brend drže prepoznatljivim, aktivnim i doslednim u svakom formatu.</p>
+
+          <div class="social__meta">
+            <span class="social__format" data-social-format>FORMAT 01 / 06 — IDENTITET</span>
+            <p class="social__caption" data-social-caption>Paleta, znak i tipografija — konstante iz kojih teče svaka objava.</p>
+            <ul class="social__stats" aria-hidden="true">
+              <li><b data-social-stat="0">+180%</b><em>Angažman · placeholder</em></li>
+              <li><b data-social-stat="1">2.4M</b><em>Doseg · placeholder</em></li>
+              <li><b data-social-stat="2">+14K</b><em>Pratioci · placeholder</em></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="social__stage">
+          <div class="brand-stack" data-brand-stack>
+            <div class="bs bs--logo is-active" data-bs="0">
+              <img class="bs__mark" src="assets/brand/flowstate-medusa.png" alt="" />
+              <div class="bs__palette"><i></i><i></i><i></i><i></i></div>
+              <span class="bs__cap">FLOWSTATE / IDENTITET</span>
+            </div>
+            <div class="bs bs--post" data-bs="1">
+              <div class="bs__post-media"><img class="bs__mark sm" src="assets/brand/flowstate-logo-stacked.png" alt="" /></div>
+              <div class="bs__post-foot"><span>flowstate</span><span>NOVI RAD ↗</span></div>
+            </div>
+            <div class="bs bs--carousel" data-bs="2">
+              <span class="bs__slide"></span><span class="bs__slide"></span><span class="bs__slide"></span>
+              <span class="bs__dots"><i></i><i></i><i></i></span>
+            </div>
+            <div class="bs bs--story" data-bs="3">
+              <span class="bs__progress"><i></i><i></i><i></i></span>
+              <img class="bs__mark sm" src="assets/brand/flowstate-medusa.png" alt="" />
+              <span class="bs__story-cta">PREVUCI GORE</span>
+            </div>
+            <div class="bs bs--reel" data-bs="4">
+              <img class="bs__mark sm" src="assets/brand/flowstate-medusa.png" alt="" />
+              <span class="bs__reel-ui">▶</span>
+              <span class="bs__scrub"><i></i></span>
+            </div>
+            <div class="bs bs--grid" data-bs="5">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+          <span class="social__coord" aria-hidden="true">[ FORMAT / SKROL ]</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================================
+       04  UNUTAR IZRADE — prostorni zoom-in
+  =================================================================== -->
+  <section class="build section section--dark" id="build" data-theme="dark">
+    <div class="section__index">
+      <span class="idx">04</span><span class="idx-label">UNUTAR IZRADE</span>
+    </div>
+
+    <div class="build__pin" data-build-pin>
+      <div class="build__copy" data-build-copy>
+        <h2 class="build__title">
+          <span>OD STRUKTURE</span>
+          <span class="is-signal">DO ISKUSTVA.</span>
+        </h2>
+      </div>
+
+      <div class="build__scene" data-build-scene>
+        <div class="browser" data-browser>
+          <div class="browser__bar"><i></i><i></i><i></i><span>flowstate / build</span></div>
+          <div class="browser__stage">
+            <div class="blayer blayer--wire" data-blayer="0">
+              <span></span><span></span><span></span><span></span><span></span>
+              <em>SKICA</em>
+            </div>
+            <div class="blayer blayer--html" data-blayer="1">
+              <code>&lt;header&gt;</code><code>&lt;main&gt;</code><code>&lt;section&gt;</code><code>&lt;footer&gt;</code>
+              <em>HTML STRUKTURA</em>
+            </div>
+            <div class="blayer blayer--css" data-blayer="2">
+              <i></i><i></i><i></i><i></i><i></i><i></i>
+              <em>CSS GRID</em>
+            </div>
+            <div class="blayer blayer--js" data-blayer="3">
+              <span class="jsline"></span><span class="jsline"></span><span class="jsline"></span>
+              <em>JS INTERAKCIJA</em>
+            </div>
+            <div class="blayer blayer--final" data-blayer="4">
+              <span class="fh"></span><span class="fb"></span><span class="fc"></span>
+              <em>ŽIV SAJT</em>
+            </div>
+          </div>
+        </div>
+        <ul class="build__ticks" aria-hidden="true">
+          <li>HTML</li><li>CSS</li><li>JS</li><li>OBJAVA</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================================
+       05  IZDVOJENI RADOVI
+  =================================================================== -->
+  <section class="work section section--dark" id="work" data-theme="dark">
+    <div class="section__index">
+      <span class="idx">05</span><span class="idx-label">IZDVOJENI RADOVI</span>
+    </div>
+
+    <div class="work__head grid">
+      <h2 class="work__title">
+        <span>NAPRAVLJENO</span>
+        <span class="is-signal">DA SE PAMTI.</span>
+      </h2>
+      <p>Za sada placeholderi — pravi radovi stižu ovde kako budu izlazili.</p>
     </div>
 
     <div class="work__list">
-      <article class="work-item" data-work="1">
-        <div class="work-item__visual">
-          <!-- PLACEHOLDER: replace with real project screenshot/video -->
-          <div class="work-item__placeholder ph-1"></div>
+      <article class="project" data-project>
+        <div class="project__meta">
+          <span class="project__no">01</span>
+          <h3 class="project__name">Northbound</h3>
+          <span class="project__cat">Web dizajn i razvoj</span>
+          <span class="project__year">2025</span>
+          <p class="project__desc">Commerce platforma prepravljena oko brzine učitavanja i jednog samouverenog tipografskog sistema.</p>
+          <a class="project__link" href="#contact" data-magnetic>POGLEDAJ PROJEKAT ↗</a>
         </div>
-        <div class="work-item__meta">
-          <h3 class="work-item__title">GIGA CENTAR</h3>
-          <p class="work-item__cat">Web Design &amp; Development — 2026</p>
-        </div>
-      </article>
-
-      <article class="work-item work-item--right" data-work="2">
-        <div class="work-item__visual">
-          <div class="work-item__placeholder ph-2"></div>
-        </div>
-        <div class="work-item__meta">
-          <h3 class="work-item__title">VILA RADOVANJE</h3>
-          <p class="work-item__cat">Web Design — 2026</p>
+        <div class="project__media" data-view>
+          <div class="project__fill ph-a"><span>WEB / DEV</span></div>
         </div>
       </article>
 
-      <article class="work-item" data-work="3">
-        <div class="work-item__visual">
-          <div class="work-item__placeholder ph-3"></div>
+      <article class="project" data-project>
+        <div class="project__meta">
+          <span class="project__no">02</span>
+          <h3 class="project__name">Signal / Noise</h3>
+          <span class="project__cat">Interaktivni sajt</span>
+          <span class="project__year">2025</span>
+          <p class="project__desc">Scroll priča o brendu za proizvođača audio opreme, napravljena kao jedna neprekidna scena.</p>
+          <a class="project__link" href="#contact" data-magnetic>POGLEDAJ PROJEKAT ↗</a>
         </div>
-        <div class="work-item__meta">
-          <h3 class="work-item__title">BRAND IDENTITY 01</h3>
-          <p class="work-item__cat">Graphic Design — 2026</p>
+        <div class="project__media" data-view>
+          <div class="project__fill ph-b"><span>INTERAKTIVNO</span></div>
+        </div>
+      </article>
+
+      <article class="project" data-project>
+        <div class="project__meta">
+          <span class="project__no">03</span>
+          <h3 class="project__name">Meridian</h3>
+          <span class="project__cat">Vizuelni identitet</span>
+          <span class="project__year">2024</span>
+          <p class="project__desc">Kompletan identitet za finansijsku savetodavnu firmu: znak, pokret i funkcionalan dizajn sistem.</p>
+          <a class="project__link" href="#contact" data-magnetic>POGLEDAJ PROJEKAT ↗</a>
+        </div>
+        <div class="project__media" data-view>
+          <div class="project__fill ph-c"><span>IDENTITET</span></div>
         </div>
       </article>
 
-      <article class="work-item work-item--right" data-work="4">
-        <div class="work-item__visual">
-          <div class="work-item__placeholder ph-4"></div>
+      <article class="project" data-project>
+        <div class="project__meta">
+          <span class="project__no">04</span>
+          <h3 class="project__name">Hello Human</h3>
+          <span class="project__cat">Kampanja na mrežama</span>
+          <span class="project__year">2025</span>
+          <p class="project__desc">Sadržajni pogon od 90 dana koji je lansiranje kozmetike doveo do prve prave publike.</p>
+          <a class="project__link" href="#contact" data-magnetic>POGLEDAJ PROJEKAT ↗</a>
         </div>
-        <div class="work-item__meta">
-          <h3 class="work-item__title">SOCIAL CAMPAIGN 01</h3>
-          <p class="work-item__cat">Social Media — 2026</p>
+        <div class="project__media" data-view>
+          <div class="project__fill ph-d"><span>KAMPANJA</span></div>
+        </div>
+      </article>
+
+      <article class="project" data-project>
+        <div class="project__meta">
+          <span class="project__no">05</span>
+          <h3 class="project__name">Frames</h3>
+          <span class="project__cat">Kreiranje sadržaja</span>
+          <span class="project__year">2024</span>
+          <p class="project__desc">Kratki video i fotografija za sezonsku kolekciju proizvođača nameštaja.</p>
+          <a class="project__link" href="#contact" data-magnetic>POGLEDAJ PROJEKAT ↗</a>
+        </div>
+        <div class="project__media" data-view>
+          <div class="project__fill ph-e"><span>SADRŽAJ</span></div>
         </div>
       </article>
     </div>
   </section>
 
-  <!-- ============ SCROLL STORY / 3D TRANSITION ============ -->
-  <section class="storysplit" id="storysplit">
-    <div class="storysplit__pin">
-      <canvas id="storyCanvas"></canvas>
-      <div class="storysplit__word" data-word="WEB">WEB</div>
-      <div class="storysplit__word" data-word="SOCIAL">SOCIAL</div>
-      <div class="storysplit__word" data-word="DESIGN">DESIGN</div>
-    </div>
-  </section>
-
-  <!-- ============ MARQUEE ============ -->
-  <div class="marquee" id="marquee">
-    <div class="marquee__track" id="marqueeTrack">
-      <span>WEB DESIGN — SOCIAL MEDIA — GRAPHIC DESIGN — BRANDING — CONTENT — FLOWSTATE — </span>
-      <span>WEB DESIGN — SOCIAL MEDIA — GRAPHIC DESIGN — BRANDING — CONTENT — FLOWSTATE — </span>
-    </div>
-  </div>
-
-  <!-- ============ PHILOSOPHY ============ -->
-  <section class="philosophy" id="filozofija">
-    <div class="section-head">
-      <div class="intro__num">04 / 08</div>
-    </div>
-    <div class="philosophy__stack">
-      <div class="phil-word" data-phil="ideja">
-        <h2>IDEJA.</h2>
-        <p>Svaki dobar projekat počinje razumevanjem biznisa.</p>
-      </div>
-      <div class="phil-word" data-phil="dizajn">
-        <h2>DIZAJN.</h2>
-        <p>Vizuelni identitet koji komunicira pre nego što korisnik pročita prvu rečenicu.</p>
-      </div>
-      <div class="phil-word" data-phil="rezultat">
-        <h2>REZULTAT.</h2>
-        <p>Dizajn nije dekoracija. Njegov posao je da pokrene akciju.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ PROCESS ============ -->
-  <section class="process" id="proces">
-    <div class="section-head">
-      <div class="intro__num">05 / 08</div>
-      <h2 class="section-head__title">PROCES</h2>
+  <!-- ==================================================================
+       06  PROCES  (svetla sekcija) — digitalni signal kroz faze
+  =================================================================== -->
+  <section class="process section section--light" id="process" data-theme="light">
+    <div class="section__index">
+      <span class="idx">06</span><span class="idx-label">PROCES</span>
     </div>
 
-    <div class="process__timeline" id="processTimeline">
-      <div class="process__line"><span class="process__line-fill" id="processFill"></span></div>
-
-      <div class="process-step" data-step="1">
-        <span class="process-step__num">01</span>
-        <span class="process-step__name">UPOZNAVANJE</span>
-        <p class="process-step__desc">Razumevamo biznis, korisnike i ciljeve pre prve linije koda.</p>
-      </div>
-      <div class="process-step" data-step="2">
-        <span class="process-step__num">02</span>
-        <span class="process-step__name">STRATEGIJA</span>
-        <p class="process-step__desc">Definišemo pravac, poziciju i plan koji vodi ka rezultatu.</p>
-      </div>
-      <div class="process-step" data-step="3">
-        <span class="process-step__num">03</span>
-        <span class="process-step__name">KREACIJA</span>
-        <p class="process-step__desc">Dizajniramo i razvijamo — vizuelno i tehnički, paralelno.</p>
-      </div>
-      <div class="process-step" data-step="4">
-        <span class="process-step__num">04</span>
-        <span class="process-step__name">REALIZACIJA</span>
-        <p class="process-step__desc">Testiramo, finaliziramo i lansiramo bez kompromisa.</p>
-      </div>
-      <div class="process-step" data-step="5">
-        <span class="process-step__num">05</span>
-        <span class="process-step__name">RAST</span>
-        <p class="process-step__desc">Pratimo, unapređujemo i gradimo dalje zajedno sa brendom.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ ABOUT / STUDIO ============ -->
-  <section class="about" id="studio">
-    <div class="section-head">
-      <div class="intro__num">06 / 08</div>
-      <h2 class="section-head__title">FLOWSTATE</h2>
-    </div>
-
-    <div class="about__grid">
-      <h3 class="about__statement">
-        KREATIVNI STUDIO<br>ZA DIGITALNO DOBA.
-      </h3>
-     <p class="about__body">
-  Flowstate je kreativni digitalni studio koji spaja dizajn, razvoj i komunikaciju
-  u jednu celinu. Gradimo digitalna iskustva koja imaju ritam, karakter i jasan cilj —
-  od prve ideje do sajta, sadržaja i vizuelnog identiteta koji ostaju zapamćeni.
-</p>
-      <div class="about__disciplines">
-        <span>WEB</span>
-        <span>SOCIAL</span>
-        <span>DESIGN</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CONTACT ============ -->
-  <section class="contact" id="kontakt">
-    <div class="contact__intro">
-      <div class="intro__num">07 / 08</div>
-      <h2 class="contact__title">
-        <span class="reveal-line">IMATE IDEJU?</span>
+    <div class="process__head grid">
+      <h2 class="process__title">
+        <span>JASAN TOK</span>
+        <span>ZA ORIGINALAN RAD.</span>
       </h2>
-      <h3 class="contact__title contact__title--sub">
-        <span class="reveal-line">HAJDE DA JE</span>
-        <span class="reveal-line">PRETVORIMO U NEŠTO.</span>
-      </h3>
     </div>
 
-    <a href="#contactForm" class="magnetic-btn" id="magneticBtn">
-      <span>POKRENI<br>PROJEKAT ↗</span>
-    </a>
+    <div class="process__wrap">
+      <svg class="process__wave" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+        <path data-wave d="M0,60 C60,60 60,20 120,20 S180,100 240,100 200,20 300,20 360,60 420,60 480,100 540,100 600,20 660,20 720,60 780,60 840,20 900,20 960,100 1020,100 1080,60 1140,60 1200,60 1200,60" fill="none" stroke="currentColor" stroke-width="2"/>
+      </svg>
 
-    <form class="contact-form" id="contactForm" novalidate>
-      <div class="contact-form__row">
-        <div class="field">
-          <label for="f-ime">Ime</label>
-          <input type="text" id="f-ime" name="ime" required autocomplete="name">
-        </div>
-        <div class="field">
-          <label for="f-kompanija">Kompanija</label>
-          <input type="text" id="f-kompanija" name="kompanija" autocomplete="organization">
+      <ol class="process__steps">
+        <li class="pstep" data-pstep>
+          <span class="pstep__no">01</span>
+          <h3>Otkrivanje</h3>
+          <p>Razumevanje biznisa, publike i ciljeva.</p>
+        </li>
+        <li class="pstep" data-pstep>
+          <span class="pstep__no">02</span>
+          <h3>Pravac</h3>
+          <p>Definisanje strategije, strukture i vizuelnog pravca.</p>
+        </li>
+        <li class="pstep" data-pstep>
+          <span class="pstep__no">03</span>
+          <h3>Dizajn</h3>
+          <p>Izrada identiteta, interfejsa i sistema sadržaja.</p>
+        </li>
+        <li class="pstep" data-pstep>
+          <span class="pstep__no">04</span>
+          <h3>Razvoj</h3>
+          <p>Pretvaranje dizajna u brz i funkcionalan proizvod.</p>
+        </li>
+        <li class="pstep" data-pstep>
+          <span class="pstep__no">05</span>
+          <h3>Sadržaj</h3>
+          <p>Prilagođavanje identiteta sajtu i društvenim mrežama.</p>
+        </li>
+        <li class="pstep" data-pstep>
+          <span class="pstep__no">06</span>
+          <h3>Lansiranje i rast</h3>
+          <p>Testiranje, lansiranje, praćenje i unapređivanje.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ==================================================================
+       07  KONTAKT
+  =================================================================== -->
+  <section class="contact section section--dark" id="contact" data-theme="dark">
+    <div class="section__index">
+      <span class="idx">07</span><span class="idx-label">KONTAKT</span>
+    </div>
+
+    <div class="contact__grid grid">
+      <div class="contact__lead">
+        <h2 class="contact__title">
+          <span>IMAŠ IDEJU?</span>
+          <span>PUSTIMO JE</span>
+          <span class="is-signal">U TOK.</span>
+        </h2>
+        <div class="contact__aside">
+          <p>Reci nam šta gradiš. Na svaki ozbiljan upit odgovaramo u roku od dva radna dana.</p>
+          <p class="contact__coord">SRBIJA — DOSTUPNI ŠIROM SVETA</p>
         </div>
       </div>
-      <div class="contact-form__row">
-        <div class="field">
-          <label for="f-email">Email</label>
-          <input type="email" id="f-email" name="email" required autocomplete="email">
-        </div>
-        <div class="field">
-          <label for="f-telefon">Telefon</label>
-          <input type="tel" id="f-telefon" name="telefon" autocomplete="tel">
-        </div>
-      </div>
 
-      <fieldset class="field-group">
-        <legend>Šta vam je potrebno?</legend>
-        <div class="chip-group" data-group="usluga">
-          <button type="button" class="chip" data-value="Web sajt">Web sajt</button>
-          <button type="button" class="chip" data-value="Društvene mreže">Društvene mreže</button>
-          <button type="button" class="chip" data-value="Grafički dizajn">Grafički dizajn</button>
-          <button type="button" class="chip" data-value="Branding">Branding</button>
-          <button type="button" class="chip" data-value="Više usluga">Više usluga</button>
+      <form class="form" id="contactForm" novalidate>
+        <div class="form__row">
+          <label class="field">
+            <span class="field__label">Ime</span>
+            <input type="text" name="name" autocomplete="name" required />
+          </label>
+          <label class="field">
+            <span class="field__label">Firma</span>
+            <input type="text" name="company" autocomplete="organization" />
+          </label>
         </div>
-      </fieldset>
-
-      <fieldset class="field-group">
-        <legend>Budžet</legend>
-        <div class="chip-group" data-group="budzet">
-          <button type="button" class="chip" data-value="Do 500 €">Do 500 €</button>
-          <button type="button" class="chip" data-value="500–1.000 €">500–1.000 €</button>
-          <button type="button" class="chip" data-value="1.000–2.500 €">1.000–2.500 €</button>
-          <button type="button" class="chip" data-value="2.500 €+">2.500 €+</button>
+        <div class="form__row">
+          <label class="field">
+            <span class="field__label">Email</span>
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+          <label class="field">
+            <span class="field__label">Telefon</span>
+            <input type="tel" name="phone" autocomplete="tel" />
+          </label>
         </div>
-      </fieldset>
+        <div class="form__row">
+          <label class="field">
+            <span class="field__label">Usluga</span>
+            <select name="service" required>
+              <option value="" disabled selected>Izaberi…</option>
+              <option>Web dizajn</option>
+              <option>Web razvoj</option>
+              <option>UI/UX</option>
+              <option>Brending</option>
+              <option>Vođenje društvenih mreža</option>
+              <option>Dizajn za društvene mreže</option>
+              <option>Kreiranje sadržaja</option>
+              <option>Više usluga</option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="field__label">Budžet</span>
+            <select name="budget">
+              <option value="" disabled selected>Izaberi…</option>
+              <option>Do 2.000 €</option>
+              <option>2.000 – 5.000 €</option>
+              <option>5.000 – 12.000 €</option>
+              <option>12.000 € +</option>
+              <option>Još nisam siguran</option>
+            </select>
+          </label>
+        </div>
+        <label class="field field--full">
+          <span class="field__label">Poruka</span>
+          <textarea name="message" rows="4" required></textarea>
+        </label>
 
-      <div class="field">
-        <label for="f-poruka">Poruka</label>
-        <textarea id="f-poruka" name="poruka" rows="4"></textarea>
-      </div>
-
-      <button type="submit" class="btn btn--filled contact-form__submit">
-        POŠALJI UPIT <span>↗</span>
-      </button>
-      <p class="contact-form__status" id="formStatus" role="status" aria-live="polite"></p>
-    </form>
+        <div class="form__foot">
+          <button type="submit" class="btn btn--fill btn--lg" data-magnetic>POKRENI PROJEKAT ↗</button>
+          <p class="form__notice" data-form-notice role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </div>
   </section>
 
 </main>
 
 <!-- ============ FOOTER ============ -->
 <footer class="footer">
-  <div class="footer__top">
-    <a href="#top" class="footer__logo" id="footerLogo">
-      <span>P</span><span>H</span><span>A</span><span>N</span><span>T</span><span>O</span><span>M</span>&nbsp;<span>A</span><span>R</span><span>T</span><span>S</span>
-    </a>
+  <div class="footer__top grid">
+    <span class="footer__brand">
+      <img class="footer__logo" src="assets/brand/flowstate-logo-horizontal.png" alt="FLOWSTATE" />
+    </span>
+    <div class="footer__cols">
+      <ul>
+        <li class="footer__h">STUDIO</li>
+        <li><a href="#capabilities">Web dizajn</a></li>
+        <li><a href="#capabilities">Razvoj</a></li>
+        <li><a href="#capabilities">Brending</a></li>
+        <li><a href="#social">Društvene mreže</a></li>
+        <li><a href="#capabilities">Kreiranje sadržaja</a></li>
+      </ul>
+      <ul>
+        <li class="footer__h">MREŽE</li>
+        <li><a href="#" data-placeholder>Instagram</a></li>
+        <li><a href="#" data-placeholder>Facebook</a></li>
+        <li><a href="#" data-placeholder>TikTok</a></li>
+        <li><a href="#" data-placeholder>Email</a></li>
+      </ul>
+      <ul>
+        <li class="footer__h">INDEKS</li>
+        <li><a href="#work">Radovi</a></li>
+        <li><a href="#process">Proces</a></li>
+        <li><a href="#studio">Studio</a></li>
+        <li><a href="#contact">Kontakt</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="footer__grid">
-    <div class="footer__col">
-      <span class="footer__label">Usluge</span>
-      <a href="#usluge">Web Design</a>
-      <a href="#usluge">Social Media</a>
-      <a href="#usluge">Graphic Design</a>
-    </div>
-    <div class="footer__col">
-      <span class="footer__label">Kontakt</span>
-      <!-- PLACEHOLDER: replace with real social + email links -->
-      <a href="#" target="_blank" rel="noopener">Instagram</a>
-      <a href="mailto:hello@flowstate.rs">Email</a>
-    </div>
-    <div class="footer__col">
-      <span class="footer__label">Lokacija</span>
-      <span>Srbija / Dostupni svuda u svetu</span>
-    </div>
-  </div>
-  <div class="footer__bottom">
-    <span>© <span id="year"></span> FLOWSTATE</span>
-    <span class="footer__status">● AVAILABLE FOR PROJECTS</span>
+  <div class="footer__bottom grid">
+    <span>SRBIJA / DOSTUPNI ŠIROM SVETA</span>
+    <span>© <span data-year>2026</span> FLOWSTATE</span>
+    <button class="footer__top-btn" data-back-top>NA VRH ↑</button>
   </div>
 </footer>
 
-<!-- ============ SCRIPTS ============ -->
-<!-- ============ SCRIPTS ============ -->
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-<!-- FBXLoader zahteva fflate -->
-
-
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
-
-
-
-<script src="three-scene.js"></script>
-
-<script src="script.js"></script>
-
-</body>
-</html>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 300" role="img" aria-labelledby="title">
+  <title id="title">Flowstate jellyfish mark</title>
+  <g fill="none" stroke="#2D5BFF" stroke-width="18" stroke-linecap="round">
+    <path d="M265 100C220 78 176 68 126 85C96 95 76 94 54 82"/>
+    <path d="M268 121C222 107 181 108 137 127C105 141 79 141 51 127"/>
+    <path d="M268 143C224 143 190 158 153 177C119 194 88 193 55 177"/>
+    <path d="M270 165C230 178 204 201 169 215C131 231 99 226 69 207"/>
+  </g>
+  <path fill="#F7F8FA" d="M266 49C357 49 410 92 410 150C410 208 357 251 266 251C292 222 305 187 305 150C305 113 292 78 266 49Z"/>
+  <path fill="#080A0E" d="M277 135C301 127 326 127 348 133C360 136 365 143 365 150C365 157 360 164 348 167C326 173 301 173 277 165C281 155 281 145 277 135Z"/>
+</svg>

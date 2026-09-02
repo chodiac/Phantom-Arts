@@ -25,8 +25,8 @@ const CONFIG = {
 
   // ?motion forces the full experience even when the OS asks to reduce it
   // (opt-in, for previews/demos only — default still respects the setting)
-  const forceMotion = new URLSearchParams(location.search).has('motion');
-  const reduceMotion = !forceMotion && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const forceMotion = true;
+const reduceMotion = false;
   const isTouch = window.matchMedia('(pointer: coarse)').matches;
 
   const hasGSAP = !!(window.gsap && window.ScrollTrigger);

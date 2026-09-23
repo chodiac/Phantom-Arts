@@ -38,9 +38,26 @@ while ($listener.IsListening) {
       $ext = [IO.Path]::GetExtension($file).ToLowerInvariant()
       $ctx.Response.ContentType = $(if ($mime.ContainsKey($ext)) { $mime[$ext] } else { 'application/octet-stream' })
       $ctx.Response.Headers['Cache-Control'] = 'no-store'
+      $ctx.Response.Headers['Accept-Ranges'] = 'bytes'
       $bytes = [IO.File]::ReadAllBytes($file)
-      $ctx.Response.ContentLength64 = $bytes.Length
-      $ctx.Response.OutputStream.Write($bytes, 0, $bytes.Length)
+      $total = $bytes.Length
+
+      # honor Range requests (needed for <video> seeking — without this,
+      # browsers treat the resource as non-seekable even once fully buffered)
+      $range = $ctx.Request.Headers['Range']
+      if ($range -and $range -match '^bytes=(\d*)-(\d*)$') {
+        $start = if ($Matches[1]) { [int64]$Matches[1] } else { 0 }
+        $end   = if ($Matches[2]) { [int64]$Matches[2] } else { $total - 1 }
+        if ($end -gt $total - 1) { $end = $total - 1 }
+        $len = $end - $start + 1
+        $ctx.Response.StatusCode = 206
+        $ctx.Response.Headers['Content-Range'] = "bytes $start-$end/$total"
+        $ctx.Response.ContentLength64 = $len
+        $ctx.Response.OutputStream.Write($bytes, $start, $len)
+      } else {
+        $ctx.Response.ContentLength64 = $total
+        $ctx.Response.OutputStream.Write($bytes, 0, $total)
+      }
     } else {
       $ctx.Response.StatusCode = 404
       $b = [Text.Encoding]::UTF8.GetBytes("404 - $rel")

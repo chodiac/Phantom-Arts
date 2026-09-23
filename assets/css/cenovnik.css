@@ -1,0 +1,83 @@
+/* =====================================================================
+   CENOVNIK — samostalna stranica, deli tokene/fontove sa main.css
+   ===================================================================== */
+body.cen{background:var(--ink);color:var(--white)}
+
+.cen-bar{
+  position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;
+  padding:20px var(--pad);border-bottom:1px solid var(--line);
+  background:rgba(8,10,14,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+}
+.cen-bar__logo{height:22px;display:block}
+.cen-bar__back{
+  font-family:var(--ff-mono);font-size:12px;letter-spacing:.14em;color:var(--smoke);
+  display:flex;align-items:center;gap:8px;
+}
+.cen-bar__back:hover{color:var(--white)}
+
+.cen-wrap{max-width:1180px;margin-inline:auto;padding-inline:var(--pad)}
+
+.cen-hero{padding-block:clamp(60px,10vh,110px) clamp(40px,6vh,70px)}
+.cen-hero__idx{font-family:var(--ff-mono);font-size:12px;letter-spacing:.16em;color:var(--signal)}
+.cen-hero h1{
+  margin:18px 0 22px;font-family:var(--ff-display);font-weight:600;text-transform:uppercase;
+  font-size:clamp(2.4rem,7vw,5rem);line-height:.98;letter-spacing:-.02em;
+}
+.cen-hero p{max-width:60ch;color:var(--smoke);font-size:1.02rem}
+
+.cen-cat{padding-block:clamp(40px,6vh,70px);border-top:1px solid var(--line)}
+.cen-cat__label{font-family:var(--ff-mono);font-size:11px;letter-spacing:.16em;color:var(--signal)}
+.cen-cat h2{
+  margin:14px 0 8px;font-family:var(--ff-display);font-weight:600;text-transform:uppercase;
+  font-size:clamp(1.6rem,3.6vw,2.6rem);letter-spacing:-.01em;
+}
+.cen-cat__intro{color:var(--smoke);max-width:62ch;margin-bottom:clamp(28px,4vh,44px)}
+
+.cen-tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.cen-tier{background:var(--ink);padding:clamp(26px,2.6vw,34px);position:relative;display:flex;flex-direction:column}
+.cen-tier--popular{background:var(--graphite)}
+.cen-tier__tag{
+  align-self:flex-start;margin-bottom:14px;font-family:var(--ff-mono);font-size:10px;letter-spacing:.14em;color:var(--signal);
+  border:1px solid var(--signal);border-radius:999px;padding:5px 12px;
+}
+.cen-tier__name{font-family:var(--ff-display);font-weight:600;text-transform:uppercase;font-size:1.15rem;letter-spacing:-.01em;margin-bottom:14px}
+.cen-tier__desc{color:var(--smoke);font-size:.9rem;margin-bottom:18px}
+.cen-tier__list{display:flex;flex-direction:column;gap:8px;font-family:var(--ff-mono);font-size:12.5px;color:var(--white);margin-bottom:14px}
+.cen-tier__list li{position:relative;padding-left:20px;line-height:1.4}
+.cen-tier__list li::before{content:"→";position:absolute;left:0;top:0;color:var(--signal)}
+.cen-tier__note{font-size:.8rem;color:var(--smoke-dim);margin-bottom:14px}
+.cen-tier__price{
+  margin-top:auto;padding-top:20px;border-top:1px solid var(--line);
+  font-family:var(--ff-display);font-weight:600;color:var(--white);
+  font-size:clamp(1.5rem,2.2vw,1.9rem);letter-spacing:-.01em;line-height:1.15;
+}
+.cen-tier--popular .cen-tier__price{border-top-color:rgba(255,255,255,.14)}
+
+.cen-price-table{width:100%;border-collapse:collapse;margin-bottom:clamp(30px,4vh,44px)}
+.cen-price-table th,.cen-price-table td{padding:14px 16px;border-bottom:1px solid var(--line);text-align:left;font-size:.92rem}
+.cen-price-table th{font-family:var(--ff-mono);font-size:11px;letter-spacing:.12em;color:var(--smoke);text-transform:uppercase;font-weight:500}
+.cen-price-table td:last-child,.cen-price-table th:last-child{text-align:right;font-family:var(--ff-mono);color:var(--signal)}
+
+.cen-compare{overflow-x:auto}
+.cen-compare table{width:100%;border-collapse:collapse;min-width:560px}
+.cen-compare th,.cen-compare td{padding:14px 16px;border-bottom:1px solid var(--line);text-align:left;font-size:.9rem}
+.cen-compare th{font-family:var(--ff-mono);font-size:11px;letter-spacing:.1em;color:var(--smoke);text-transform:uppercase;font-weight:500}
+.cen-compare td:last-child,.cen-compare th:last-child{text-align:right;font-family:var(--ff-mono);color:var(--signal);white-space:nowrap}
+.cen-compare tr:hover td{background:rgba(255,255,255,.02)}
+
+.cen-terms{display:flex;flex-direction:column;gap:14px}
+.cen-terms li{position:relative;padding-left:26px;color:var(--smoke);font-size:.94rem;line-height:1.5}
+.cen-terms li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:1px;background:var(--signal)}
+
+.cen-cta{
+  padding-block:clamp(60px,8vh,100px);border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;
+}
+.cen-cta h2{font-family:var(--ff-display);font-weight:600;text-transform:uppercase;font-size:clamp(1.6rem,3.6vw,2.4rem);letter-spacing:-.01em;max-width:16ch}
+
+.cen-foot{padding-block:30px;border-top:1px solid var(--line);color:var(--smoke-dim);font-size:.82rem;text-align:center}
+
+@media (max-width:700px){
+  .cen-tiers{grid-template-columns:1fr}
+  .cen-cta{flex-direction:column;align-items:flex-start}
+}

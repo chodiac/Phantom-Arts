@@ -236,6 +236,9 @@ const reduceMotion = false;
     if (reduceMotion) {
       hero.style.height = '100vh';
       gsap.set(media, { position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 1 });
+      // never moves into a square here, so once it plays through once,
+      // freeze on its last frame (the logo) rather than the opening one.
+      media.__isHeroLanded = () => true;
       return;
     }
 
@@ -250,6 +253,7 @@ const reduceMotion = false;
     let end   = { top: 0, left: 0, width: 0, height: 0 };
     let landed = false;
     let progress = 0;
+    media.__isHeroLanded = () => landed;
 
     function measure() {
       start = { top: 0, left: 0, width: innerWidth, height: innerHeight };
@@ -298,9 +302,11 @@ gsap.set(media, {
         landed = true;
         slot.appendChild(media);
         gsap.set(media, { position: 'absolute', top: 0, left: 0, x: 0, y: 0, width: '100%', height: '100%', zIndex: 1 });
+        media.__onHeroLand && media.__onHeroLand();
       } else if (p < 0.999 && landed) {
         landed = false;
         document.body.appendChild(media);
+        media.__onHeroUnland && media.__onHeroUnland();
       }
       if (!landed) {
         gsap.set(media, { position: 'fixed', top: 0, left: 0, zIndex: 4,
@@ -333,14 +339,12 @@ gsap.set(media, {
       scenes.forEach(s => s.classList.toggle('is-active', s.dataset.scene === row.dataset.cap));
       ST.refresh();
     };
+    // tap/click only — scrolling past a row must never switch it for you,
+    // on touch or otherwise.
     rows.forEach(row => {
       if (!isTouch) row.addEventListener('mouseenter', () => activate(row));
       row.addEventListener('click', () => activate(row));
       row.addEventListener('focus', () => activate(row));
-      if (isTouch) {
-        ST.create({ trigger: row, start: 'top 62%', end: 'bottom 45%',
-          onToggle: s => { if (s.isActive) activate(row); } });
-      }
     });
   }
 
@@ -355,27 +359,45 @@ gsap.set(media, {
     const capEl = $('[data-social-caption]');
 
     const FORMATS = [
-      'FORMAT 01 / 06 — IDENTITET',
-      'FORMAT 02 / 06 — OBJAVA',
-      'FORMAT 03 / 06 — CAROUSEL',
-      'FORMAT 04 / 06 — STORY',
-      'FORMAT 05 / 06 — REEL',
-      'FORMAT 06 / 06 — GRID SADRŽAJA',
+      'FORMAT 01 / 06 - IDENTITET',
+      'FORMAT 02 / 06 - OBJAVA',
+      'FORMAT 03 / 06 - CAROUSEL',
+      'FORMAT 04 / 06 - STORY',
+      'FORMAT 05 / 06 - REEL',
+      'FORMAT 06 / 06 - GRID SADRŽAJA',
     ];
     const CAPTIONS = [
-      'Paleta, znak i tipografija — konstante iz kojih teče svaka objava.',
+      'Paleta, znak i tipografija - konstante iz kojih teče svaka objava.',
       'Identitet se skuplja u jedan kvadrat. Isti sistem, jedan kadar.',
       'Kadar se širi u stranu: tri slajda koja i dalje čitaš kao jednu priču.',
       'Vertikalno, preko celog ekrana, devet sekundi. Za vrh feeda.',
       'Pokret preuzima. Statična slika postaje petlja sa svojim timeline-om.',
-      'Svi formati se slivaju nazad u jedan grid — dosledan, prepoznatljiv, živ.',
+      'Svi formati se slivaju nazad u jedan grid - dosledan, prepoznatljiv, živ.',
     ];
     // width / height factors relative to base square
     const SHAPE = [
-      [1, 1], [1, 1], [1.18, 0.82], [0.62, 1.16], [0.62, 1.16], [1, 1],
+      [1, 1], [1, 1], [0.62, 1.16], [0.62, 1.16], [0.62, 1.16], [1, 1],
     ];
 
-    let base = stack.offsetWidth || 340;
+    // NOTE: base must come from the CSS formula (width:min(360px,72vw)),
+    // never from stack.offsetWidth — GSAP leaves an inline width on the
+    // element after every format change, so offsetWidth reflects whatever
+    // shape was last applied (e.g. the narrow reel width), not the neutral
+    // square size. Re-deriving base from a corrupted offsetWidth on every
+    // ScrollTrigger.refresh() compounds into wrong, inconsistent sizes.
+    // same ratio at every width so mobile stays proportional to desktop.
+    // same 0.72-of-width ratio as desktop everywhere — but the section is
+    // pinned to exactly 100vh, and the tallest shape (story/reel, 1.16x
+    // the base) plus the heading/copy above it has to stay inside that
+    // one screen on short phones too. this only ever kicks in below
+    // roughly ~700px of viewport height; anything taller uses the plain
+    // width ratio untouched, same as desktop.
+    const computeBase = () => {
+      const byWidth = Math.min(360, innerWidth * 0.72);
+      const byHeight = (innerHeight - 536) / 1.16;
+      return Math.max(120, Math.min(byWidth, byHeight));
+    };
+    let base = computeBase();
     let idx = -1;
     const setIndex = i => {
       if (i === idx) return;
@@ -388,12 +410,26 @@ gsap.set(media, {
       capEl.textContent = CAPTIONS[i];
     };
 
-    if (reduceMotion) { base = stack.offsetWidth; setIndex(5); return; }
+    const reelBtn = $('[data-reel-play]', stack);
+    const reelGlow = $('[data-reel-glow]', stack);
+    if (reelBtn && reelGlow) {
+      reelBtn.addEventListener('click', () => {
+        reelGlow.classList.remove('is-pulsing');
+        void reelGlow.offsetWidth; // restart animation
+        reelGlow.classList.add('is-pulsing');
+      });
+      reelGlow.addEventListener('animationend', () => reelGlow.classList.remove('is-pulsing'));
+    }
+
+    if (reduceMotion) { base = computeBase(); setIndex(5); return; }
 
     ST.create({
       trigger: pin, start: 'top top', end: '+=260%',
       pin: true, scrub: true, invalidateOnRefresh: true,
-      onRefreshInit: () => { base = stack.offsetWidth || base; },
+      onRefreshInit: () => {
+        base = computeBase();
+        gsap.set(stack, { width: base * SHAPE[idx < 0 ? 0 : idx][0], height: base * SHAPE[idx < 0 ? 0 : idx][1] });
+      },
       onUpdate: self => setIndex(clamp(Math.floor(self.progress * 6), 0, 5)),
     });
     setIndex(0);
@@ -451,6 +487,14 @@ gsap.set(media, {
     $$('.project').forEach(pr => {
       const media = $('.project__media', pr);
       const fill = $('.project__fill', pr);
+
+      // desktop: pure CSS :hover/:focus-within handles the reveal.
+      // touch has no hover, so tap toggles it there instead.
+      const revealBtn = $('.project__reveal', media);
+      if (revealBtn && isTouch) {
+        revealBtn.addEventListener('click', () => media.classList.toggle('is-open'));
+      }
+
       if (reduceMotion) { gsap.set(media, { clipPath: 'inset(0 0 0% 0)' }); gsap.set(fill, { scale: 1 }); return; }
       gsap.to(media, {
         clipPath: 'inset(0 0 0% 0)', ease: 'none',
@@ -500,7 +544,7 @@ gsap.set(media, {
         form.reportValidity();
         return;
       }
-      notice.textContent = 'Forma još nije povezana sa serverom — ništa nije poslato. Za sada nas potraži preko društvenih mreža.';
+      notice.textContent = 'Forma još nije povezana sa serverom - ništa nije poslato. Za sada nas potraži preko društvenih mreža.';
       notice.classList.add('is-ok');
     });
   }
@@ -577,21 +621,44 @@ v.setAttribute('playsinline', '');
     s.src = CONFIG.HERO_VIDEO_SRC; s.type = 'video/mp4';
     v.appendChild(s);
     media.appendChild(v);
-    let hasFinished = false;
+    let hasPlayedOnce = false;
 
-v.addEventListener('ended', () => {
-  hasFinished = true;
-  v.pause();
+    // the video plays through in real time exactly once — never looped,
+    // never replayed. only after that first playthrough finishes does it
+    // become a plain two-frame freeze swap driven by the scroll-shrink
+    // animation: its own opening frame while on the fullscreen hero, its
+    // own last frame — already the FLOWSTATE logo — once landed in the
+    // square.
+    const freezeAt = t => {
+      v.pause();
+      if (Number.isFinite(v.duration)) {
+        v.currentTime = t;
+      } else {
+        v.addEventListener('loadedmetadata', () => { v.currentTime = t; }, { once: true });
+      }
+    };
+    const freezeAtEnd = () => freezeAt(Math.max(0, (v.duration || 0) - 0.04));
+    const freezeAtStart = () => freezeAt(0);
 
-  if (Number.isFinite(v.duration)) {
-    v.currentTime = Math.max(0, v.duration - 0.04);
-  }
-});
+    // exposed so the scroll-driven shrink (initHeroScene) can tell this
+    // element when it lands in / leaves its square, and ask whether it's
+    // currently landed.
+    media.__isHeroLanded = () => false;
+    media.__onHeroLand = () => { if (hasPlayedOnce) freezeAtEnd(); };
+    media.__onHeroUnland = () => { if (hasPlayedOnce) freezeAtStart(); };
+
+    v.addEventListener('ended', () => {
+      hasPlayedOnce = true;
+      // if it finished naturally while still unlanded (fullscreen hero),
+      // snap back to the opening frame instead of leaving it on the logo —
+      // the logo may only ever show once actually landed in the square.
+      if (!media.__isHeroLanded()) freezeAtStart();
+    });
     v.addEventListener('loadeddata', () => { gsap.to(ph, { opacity: 0, duration: 0.6 }); v.play().catch(() => {}); });
     new IntersectionObserver(([e]) => {
-  if (e.isIntersecting && !hasFinished) {
+  if (e.isIntersecting && !hasPlayedOnce) {
     v.play().catch(() => {});
-  } else {
+  } else if (!hasPlayedOnce) {
     v.pause();
   }
 }, { threshold: 0.05 }).observe(media);

@@ -494,23 +494,37 @@ body.has-cursor .cursor{display:block}
 .scene.is-active .wf{background:var(--signal-soft);border-style:solid;border-color:var(--signal)}
 @keyframes wfIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-.ui-stack{position:relative;width:70%;height:220px}
-.uc{position:absolute;border:1px solid var(--signal);background:var(--signal-soft);animation:ucIn .6s var(--ease) both}
-.uc--1{width:70%;height:30px;top:0;left:0;animation-delay:.05s}
-.uc--2{width:46%;height:90px;top:44px;left:0;animation-delay:.16s}
-.uc--3{width:46%;height:90px;top:44px;right:0;animation-delay:.24s}
-.uc--4{width:100%;height:40px;bottom:0;left:0;animation-delay:.34s}
-@keyframes ucIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
+/* 02 — web prodavnice: mini shop mockup */
+.shop-mock{width:78%;border:1px solid var(--line);background:var(--graphite)}
+.shop-mock__bar{display:flex;align-items:center;gap:6px;padding:8px 10px;border-bottom:1px solid var(--line)}
+.shop-mock__bar i{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.shop-mock__bar span{margin-left:8px;font-family:var(--ff-mono);font-size:9px;color:var(--smoke-dim)}
+.shop-mock__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;padding:12px}
+.shop-card{display:flex;flex-direction:column;border:1px solid var(--line);animation:wfIn .6s var(--ease) both}
+.shop-card:nth-child(1){animation-delay:.05s}
+.shop-card:nth-child(2){animation-delay:.13s}
+.shop-card:nth-child(3){animation-delay:.21s}
+.shop-card:nth-child(4){animation-delay:.29s}
+.shop-card__img{display:block;height:48px;background:linear-gradient(135deg,var(--signal-soft),transparent)}
+.shop-card.is-hot .shop-card__img{background:var(--signal-soft)}
+.shop-card b{font-family:var(--ff-mono);font-size:9px;font-weight:500;color:var(--smoke);padding:6px 8px;border-top:1px solid var(--line)}
+.shop-mock__cart{display:flex;justify-content:flex-end;align-items:center;padding:10px 12px;border-top:1px solid var(--line);font-family:var(--ff-mono);font-size:9px;letter-spacing:.1em;color:var(--smoke)}
+.shop-mock__cart em{font-style:normal;color:#fff;background:var(--signal);padding:6px 10px;letter-spacing:.12em}
 
-.ix-field{position:relative;width:80%;height:220px;display:grid;place-items:center}
-.ix-field i{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--signal);animation:ixp 3s var(--ease) infinite}
-.ix-field i:nth-child(1){top:10%;left:12%;animation-delay:0s}
-.ix-field i:nth-child(2){top:22%;right:14%;animation-delay:.3s}
-.ix-field i:nth-child(3){bottom:16%;left:20%;animation-delay:.6s}
-.ix-field i:nth-child(4){bottom:28%;right:22%;animation-delay:.9s}
-.ix-field i:nth-child(5){top:48%;left:46%;animation-delay:1.2s}
-.ix-field i:nth-child(6){top:60%;right:40%;animation-delay:1.5s}
+/* 03 — interactive: node network + cursor ripple */
+.ix-field{position:relative;width:80%;height:220px}
+.ix-lines{position:absolute;inset:0;width:100%;height:100%}
+.ix-lines line{stroke:var(--signal);stroke-width:1;stroke-dasharray:4 3;opacity:.4}
+.ix-node{position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--signal);animation:ixp 3s var(--ease) infinite}
+.ix-node:nth-of-type(1){animation-delay:0s}
+.ix-node:nth-of-type(2){animation-delay:.3s}
+.ix-node:nth-of-type(3){animation-delay:.6s}
+.ix-node:nth-of-type(4){animation-delay:.9s}
+.ix-node:nth-of-type(5){animation-delay:1.2s}
+.ix-core{width:16px;height:16px;margin:-8px 0 0 -8px;background:var(--white);box-shadow:0 0 0 4px var(--signal-soft);animation:none}
+.ix-ring{position:absolute;top:48%;left:46%;width:34px;height:34px;margin:-17px 0 0 -17px;border:1px solid var(--signal);border-radius:50%;animation:ixring 2.4s var(--ease) infinite}
 @keyframes ixp{0%,100%{transform:scale(.6);opacity:.4}50%{transform:scale(1.4);opacity:1}}
+@keyframes ixring{0%{transform:scale(.4);opacity:.9}100%{transform:scale(2.2);opacity:0}}
 
 .brand-sys{position:relative;width:72%;height:210px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;place-content:center}
 .brand-sys .bmark{grid-column:1/2;height:120px;width:auto;align-self:center;justify-self:center}
@@ -518,29 +532,54 @@ body.has-cursor .cursor{display:block}
 .sw{height:44px;border:1px solid var(--line)}
 .sw--1{background:var(--signal)}.sw--2{background:var(--white)}.sw--3{background:var(--carbon)}
 
-.cal{width:80%;display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-.cal b{aspect-ratio:1;border:1px solid var(--line);background:var(--graphite);animation:calfill .5s var(--ease) both}
-.cal b:nth-child(2n){background:var(--signal-soft);border-color:var(--signal)}
-.cal b:nth-child(5){background:var(--signal)}
-.cal b:nth-child(11){background:var(--signal)}
-@keyframes calfill{from{opacity:0}to{opacity:1}}
-
-.feed{width:80%;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.feed span{aspect-ratio:1;background:var(--graphite);border:1px solid var(--line);animation:feedIn .5s var(--ease) both}
+/* 04 — social: profile header + post grid */
+.feed-mock{width:80%}
+.feed-mock__head{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.feed-mock__avatar{width:24px;height:24px;border-radius:50%;background:var(--signal-soft);border:1px solid var(--signal);flex:none}
+.feed-mock__name{font-family:var(--ff-mono);font-size:11px;color:var(--white);letter-spacing:.04em}
+.feed-mock__stats{margin-left:auto;font-family:var(--ff-mono);font-size:9px;color:var(--smoke-dim)}
+.feed-mock__stats b{color:var(--white);font-weight:500}
+.feed{width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.feed span{position:relative;aspect-ratio:1;background:var(--graphite);border:1px solid var(--line);animation:feedIn .5s var(--ease) both}
 .feed span:nth-child(1){animation-delay:.04s}
-.feed span:nth-child(2){animation-delay:.1s;background:var(--signal-soft);border-color:var(--signal)}
+.feed span:nth-child(2){animation-delay:.1s}
 .feed span:nth-child(3){animation-delay:.16s}
 .feed span:nth-child(4){animation-delay:.22s}
-.feed span:nth-child(5){animation-delay:.28s;background:var(--signal)}
+.feed span:nth-child(5){animation-delay:.28s}
 .feed span:nth-child(6){animation-delay:.34s}
+.feed span.is-new{background:var(--signal-soft);border-color:var(--signal)}
+.feed span.is-new::before{content:"NOVO";position:absolute;top:5px;left:5px;font-family:var(--ff-mono);font-size:7px;letter-spacing:.1em;color:#fff;background:var(--signal);padding:2px 4px}
 @keyframes feedIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
-.timeline{position:relative;width:82%;height:70px;display:flex;gap:6px;align-items:center}
-.tl-clip{height:44px;background:var(--signal-soft);border:1px solid var(--signal)}
-.tl-clip:nth-child(1){width:28%}.tl-clip:nth-child(2){width:40%}.tl-clip:nth-child(3){width:22%}
-.tl-play{position:absolute;right:-6px;top:50%;translate:0 -50%;width:34px;height:34px;display:grid;place-items:center;background:var(--signal);color:#fff;border-radius:50%;font-size:12px}
-.timeline::after{content:"";position:absolute;left:0;top:50%;width:2px;height:60px;background:var(--white);animation:playhead 2.4s linear infinite}
-@keyframes playhead{from{left:0}to{left:100%}}
+/* 05 — web aplikacije: admin panel mockup */
+.app-mock{width:82%;display:flex;border:1px solid var(--line);background:var(--graphite);height:190px}
+.app-mock__side{flex:none;width:34px;padding:12px 0;display:flex;flex-direction:column;align-items:center;gap:12px;border-right:1px solid var(--line)}
+.app-mock__side i{display:block;width:10px;height:10px;border-radius:3px;background:var(--line)}
+.app-mock__side i.is-on{background:var(--signal)}
+.app-mock__main{flex:1;padding:14px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.app-mock__stats{display:flex;gap:10px}
+.app-mock__stat{flex:1;border:1px solid var(--line);padding:8px 10px;display:flex;flex-direction:column;gap:4px;animation:wfIn .5s var(--ease) both}
+.app-mock__stat:nth-child(2){animation-delay:.08s}
+.app-mock__stat b{font-family:var(--ff-display);font-size:15px;color:var(--white);font-weight:600}
+.app-mock__stat em{font-style:normal;font-family:var(--ff-mono);font-size:8px;letter-spacing:.08em;color:var(--smoke-dim)}
+.app-mock__rows{display:flex;flex-direction:column;gap:6px}
+.app-mock__rows span{display:block;height:14px;background:var(--carbon);border:1px solid var(--line);animation:wfIn .5s var(--ease) both}
+.app-mock__rows span:nth-child(1){width:100%;animation-delay:.16s}
+.app-mock__rows span:nth-child(2){width:78%;animation-delay:.22s}
+.app-mock__rows span:nth-child(3){width:88%;animation-delay:.28s}
+
+/* 07 — AI integracija: chatbot mockup */
+.chat-mock{width:80%;border:1px solid var(--line);background:var(--graphite);display:flex;flex-direction:column}
+.chat-mock__bar{display:flex;align-items:center;gap:6px;padding:8px 10px;border-bottom:1px solid var(--line)}
+.chat-mock__bar i{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.chat-mock__bar span{margin-left:8px;font-family:var(--ff-mono);font-size:9px;color:var(--smoke-dim)}
+.chat-mock__body{min-height:150px}
+.chat-mock__input{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:10px 12px;border-top:1px solid var(--line);
+  font-family:var(--ff-mono);font-size:9px;color:var(--smoke-dim);
+}
+.chat-mock__input i{font-style:normal;color:var(--signal)}
 
 /* =====================================================================
    03  SOCIAL SYSTEMS
@@ -586,26 +625,61 @@ body.has-cursor .cursor{display:block}
 .bs__post-media{flex:1;width:100%;display:grid;place-items:center;background:radial-gradient(120% 120% at 30% 20%,#1b1d22,#0d0e11)}
 .bs__post-foot{width:100%;display:flex;justify-content:space-between;padding:12px 14px;font-family:var(--ff-mono);font-size:10px;letter-spacing:.1em;color:var(--smoke);border-top:1px solid var(--line)}
 
-.bs--carousel{flex-direction:row;gap:8px;padding:22px}
-.bs__slide{flex:1;height:70%;background:var(--carbon);border:1px solid var(--line)}
-.bs__slide:nth-child(2){background:var(--signal-soft);border-color:var(--signal)}
 .bs__dots{position:absolute;bottom:16px;left:50%;translate:-50% 0;display:flex;gap:6px}
 .bs__dots i{width:6px;height:6px;border-radius:50%;background:var(--smoke-dim)}
 .bs__dots i:nth-child(2){background:var(--signal)}
 
+.bs--story{background:radial-gradient(120% 90% at 50% 0%,#161a24,var(--graphite) 62%)}
 .bs--story .bs__progress{position:absolute;top:12px;left:12px;right:12px;display:flex;gap:4px}
 .bs__progress i{flex:1;height:2px;background:var(--smoke-dim)}
 .bs__progress i:first-child{background:var(--signal)}
-.bs__story-cta{position:absolute;bottom:20px;font-family:var(--ff-mono);font-size:10px;letter-spacing:.24em;color:var(--white)}
+.bs__story-reply{position:absolute;bottom:16px;left:14px;right:14px;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-family:var(--ff-mono);font-size:9px;color:var(--smoke-dim);text-align:left}
 
-.bs--reel .bs__reel-ui{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.1);color:#fff}
+.bs__reel-media{position:relative;display:grid;place-items:center}
+.bs__reel-glow{
+  position:absolute;top:50%;left:50%;width:130px;height:130px;margin:-65px 0 0 -65px;
+  border-radius:50%;pointer-events:none;opacity:0;
+  background:radial-gradient(circle,rgba(45,91,255,.6),rgba(45,91,255,0) 70%);
+}
+.bs__reel-glow.is-pulsing{animation:reelGlow 1.1s ease-out}
+@keyframes reelGlow{0%{opacity:.9;transform:scale(.5)}70%{opacity:.35}100%{opacity:0;transform:scale(1.7)}}
+/* explicit click feedback — keep visible even under prefers-reduced-motion
+   (that global rule compresses all *,*::before,*::after animations to
+   .001ms; this higher-specificity rule wins the cascade over it) */
+.bs__reel-glow.is-pulsing{animation-duration:1.1s!important}
+.bs--reel .bs__reel-ui{
+  position:relative;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:13px;
+  transition:transform .25s var(--ease),background .25s var(--ease);
+}
+.bs--reel .bs__reel-ui:hover{background:rgba(255,255,255,.22);transform:scale(1.08)}
+.bs--reel .bs__reel-ui:active{transform:scale(.94)}
+.bs__reel-icons{position:absolute;right:12px;bottom:34px;display:flex;flex-direction:column;gap:12px;align-items:center}
+.bs__reel-icons i{font-style:normal;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.08);display:grid;place-items:center;color:#fff;font-size:13px}
 .bs__scrub{position:absolute;bottom:16px;left:14px;right:14px;height:2px;background:var(--smoke-dim)}
 .bs__scrub i{display:block;height:100%;width:38%;background:var(--signal)}
 
-.bs--grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:6px;padding:6px;background:var(--ink)}
-.bs--grid i{background:#1c1e24;border:1px solid #3a3d46}
-.bs--grid i:nth-child(3n-1){background:rgba(45,91,255,.28);border-color:var(--signal)}
-.bs--grid i:nth-child(5){background:var(--signal);border-color:var(--signal)}
+.bs--grid{flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;padding:0}
+.bs__grid-head{display:flex;align-items:center;gap:8px;padding:12px 14px;font-family:var(--ff-mono);font-size:10px;color:var(--white);border-bottom:1px solid var(--line)}
+.bs__grid-avatar{width:18px;height:18px;border-radius:50%;background:var(--signal-soft);border:1px solid var(--signal);flex:none}
+.bs__grid-head b{margin-left:auto;font-weight:500;color:var(--smoke-dim)}
+.bs__grid-cells{flex:1;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:6px;padding:6px;background:var(--ink)}
+.gc{background:#1c1e24;border:1px solid #3a3d46}
+.gc--word{
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--ff-display);font-weight:600;text-transform:uppercase;letter-spacing:.04em;
+  font-size:clamp(9px,2.4vw,13px);color:var(--white);
+  background:var(--signal-soft);border-color:var(--signal);
+}
+.gc--medusa{
+  background-color:var(--graphite);
+  background-image:url('../brand/flowstate-medusa.png');
+  background-repeat:no-repeat;background-position-x:center;
+  background-size:300% 300%;border-color:var(--line);
+}
+.gc--top{background-position-y:0%}
+.gc--mid{background-position-y:50%}
+.gc--bottom{background-position-y:100%}
 
 .social__coord{position:absolute;bottom:-30px;left:0;font-family:var(--ff-mono);font-size:10px;letter-spacing:.2em;color:var(--smoke-dim)}
 
@@ -689,6 +763,7 @@ body.has-cursor .cursor{display:block}
 .project__link:hover{color:var(--signal)}
 
 .project__media{
+  position:relative;
   aspect-ratio:4/3;overflow:hidden;border:1px solid var(--line);
   clip-path:inset(0 0 100% 0);
 }
@@ -703,6 +778,36 @@ body.has-cursor .cursor{display:block}
 .ph-d{background:linear-gradient(135deg,#0f1f1c,#0b0c0f)}
 .ph-e{background:linear-gradient(135deg,#1c1a12,#0b0c0f)}
 .project__fill span{border:1px solid var(--line);padding:10px 16px}
+
+/* hover-to-reveal: blurred/darkened scrim with the client logo centered;
+   hovering (or keyboard focus) fades the scrim away to reveal the real
+   preview underneath — it returns the moment the pointer leaves */
+.project__reveal{
+  position:absolute;inset:0;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+  width:100%;height:100%;border:0;padding:0;margin:0;background:transparent;
+  background:rgba(8,10,14,.45);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  cursor:pointer;
+  transition:opacity .4s var(--ease),visibility .4s;
+}
+.project__media.is-open .project__reveal,
+.project__media:hover .project__reveal,
+.project__media:focus-within .project__reveal{opacity:0;visibility:hidden;pointer-events:none}
+/* logos are used exactly as supplied — transparent, no plate behind them.
+   the soft light halo keeps darker marks separable from the blurred photo
+   without ever reading as a background shape. */
+.project__logo{
+  display:block;width:auto;height:auto;
+  max-width:64%;max-height:clamp(72px,17vw,160px);object-fit:contain;
+  filter:drop-shadow(0 0 30px rgba(255,255,255,.16)) drop-shadow(0 12px 28px rgba(0,0,0,.55));
+}
+.project__logo-ph{
+  display:inline-flex;align-items:center;justify-content:center;text-align:center;
+  padding:16px 26px;border:1px solid rgba(255,255,255,.35);border-radius:999px;
+  font-family:var(--ff-mono);font-size:11px;letter-spacing:.16em;color:#fff;
+  background:rgba(8,10,14,.35);
+}
 
 /* =====================================================================
    06  PROCESS  (light)
@@ -786,13 +891,41 @@ body.has-cursor .cursor{display:block}
    RESPONSIVE
    ===================================================================== */
 @media (max-width:1100px){
-  .cap__body{grid-template-columns:1fr;gap:36px}
-  .cap__stage{position:relative;top:0;aspect-ratio:16/10;order:-1}
+  /* flex (not grid) so the stage's sticky container spans the full
+     height of the row list below it — grid items each get their own
+     auto-sized track, which breaks position:sticky for the first item */
+  .cap__body{display:flex;flex-direction:column;gap:28px}
+  .cap__stage{position:sticky;top:calc(var(--nav-h) + 14px);width:100%;aspect-ratio:16/10;order:-1;flex:none;z-index:2}
   .studio__media{grid-column:1/6}
   .social__lead{grid-column:1/7}
   .social__stage{grid-column:8/13}
 }
 @media (max-width:900px){
+  /* center the marketing copy — headlines, intros, hero — on mobile.
+     lists, the accordion, process steps, project entries, the form and
+     the footer stay left-aligned: centering multi-line body text or
+     interactive list rows hurts scanability instead of helping it. */
+  .hero__copy{align-items:center;text-align:center}
+  .hero__lede{margin-inline:auto}
+  .hero__tags,.hero__cta,.hero__status{justify-content:center}
+  .hero__tags{flex-wrap:wrap;row-gap:8px}
+
+  .studio__text{text-align:center}
+  .studio__headline,.studio__body{margin-inline:auto}
+
+  .cap__head{text-align:center}
+  .cap__note{margin-inline:auto}
+
+  .social__lead{text-align:center}
+  .social__lead>p{margin-inline:auto}
+
+  .work__title{text-align:center}
+
+  .process__head{text-align:center}
+
+  .contact__lead{text-align:center}
+  .contact__aside{margin-inline:auto}
+
   :root{--nav-h:64px}
   .nav__links,.nav__status{display:none}
   .nav__toggle{display:flex}
@@ -801,14 +934,15 @@ body.has-cursor .cursor{display:block}
 
   .hero{height:135vh}
   .hero__meta{grid-template-columns:1fr}
-  .hero__tags{justify-content:flex-start}
   .hero__title{font-size:clamp(2.6rem,13vw,5rem)}
   .hero__scroll{display:none}
 
   .studio__grid{grid-template-columns:1fr}
   .studio__media,.studio__text{grid-column:1/-1}
-  .studio__media{max-width:78vw}
+  .studio__media{width:100%;max-width:78vw;margin-inline:auto}
   .studio__orbit{display:none}
+  .studio__facts{margin-top:clamp(22px,4vh,40px)}
+  .studio__facts>div{grid-template-columns:1fr;justify-items:center;text-align:center;gap:4px}
 
   .cap__title,.work__title,.process__title,.social__title,.contact__title{font-size:clamp(2rem,10vw,3.4rem)}
   .cap__head,.work__head{display:block}
@@ -817,8 +951,42 @@ body.has-cursor .cursor{display:block}
   .cap__mark{display:none}
   .cap__row.is-active .cap__name{transform:none}
 
-  .social__inner{grid-template-columns:1fr;row-gap:40px}
+  /* scene mockups (mini-browser, shop-mock, ix-field, brand-sys,
+     feed-mock, app-mock, chat-mock) were all sized for the desktop
+     4:5 stage — on the shorter mobile stage they overflow its bounds,
+     so scale the whole mockup down uniformly rather than reworking
+     each one's internal layout for a second aspect ratio. */
+  .cap__stage{aspect-ratio:4/3}
+  .scene{padding:20px}
+  .scene>.mini-browser,.scene>.shop-mock,.scene>.ix-field,
+  .scene>.brand-sys,.scene>.feed-mock,.scene>.app-mock,.scene>.chat-mock{
+    transform:scale(.72);
+  }
+
+  /* the whole section is pinned to exactly 100vh while scrolling through
+     it, so on short mobile screens every piece — heading, copy, stats and
+     the visual — has to actually fit in that one screen at once, or half
+     of it sits out of frame for the whole scene. everything below is
+     sized/ordered to fit within one small viewport, not just look right
+     scrolled to normally. */
+  #social.section{padding-top:0}
+  /* the index label now lives inside the pin itself (see markup) so it's
+     part of the same locked frame as the heading/visual, instead of
+     scrolling away moments before the pin engages */
+  .social__index{padding-top:calc(var(--nav-h) + 8px);margin-bottom:26px}
+  .social__inner{grid-template-columns:1fr;row-gap:52px;align-items:start;align-content:start;
+    padding-block:0 26px}
   .social__lead,.social__stage{grid-column:1/-1}
+  .social__stage{min-height:auto}
+  .social__title{font-size:clamp(1.5rem,7.4vw,2.1rem)}
+  .social__lead>p{margin-top:18px;font-size:.85rem}
+  .social__meta{margin-top:24px;padding-top:18px}
+  .social__caption{margin-top:10px;min-height:0;font-size:.8rem}
+  .social__stats{flex-wrap:nowrap;gap:8px;margin-top:22px}
+  .social__stats li{flex:1;min-width:0}
+  .social__stats b{font-size:1rem}
+  .social__stats em{font-size:7px;letter-spacing:.04em;white-space:nowrap}
+  .social__coord{display:none}
 
   .project{grid-template-columns:1fr;gap:24px}
   .project__meta{position:static}

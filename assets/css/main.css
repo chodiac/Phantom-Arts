@@ -512,7 +512,7 @@ body.has-cursor .cursor{display:block}
 .shop-mock__cart em{font-style:normal;color:#fff;background:var(--signal);padding:6px 10px;letter-spacing:.12em}
 
 /* 03 — interactive: node network + cursor ripple */
-.ix-field{position:relative;width:80%;height:220px}
+.ix-field{position:relative;width:80%;height:220px;cursor:pointer}
 .ix-lines{position:absolute;inset:0;width:100%;height:100%}
 .ix-lines line{stroke:var(--signal);stroke-width:1;stroke-dasharray:4 3;opacity:.4}
 .ix-node{position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--signal);animation:ixp 3s var(--ease) infinite}
@@ -525,6 +525,14 @@ body.has-cursor .cursor{display:block}
 .ix-ring{position:absolute;top:48%;left:46%;width:34px;height:34px;margin:-17px 0 0 -17px;border:1px solid var(--signal);border-radius:50%;animation:ixring 2.4s var(--ease) infinite}
 @keyframes ixp{0%,100%{transform:scale(.6);opacity:.4}50%{transform:scale(1.4);opacity:1}}
 @keyframes ixring{0%{transform:scale(.4);opacity:.9}100%{transform:scale(2.2);opacity:0}}
+
+/* click/tap burst — the one interaction every device gets, mouse or touch */
+.ix-ripple{
+  position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;
+  border:1px solid var(--signal);border-radius:50%;
+  pointer-events:none;animation:ixburst .7s var(--ease) forwards;
+}
+@keyframes ixburst{0%{transform:scale(1);opacity:1}100%{transform:scale(8);opacity:0}}
 
 .brand-sys{position:relative;width:72%;height:210px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;place-content:center}
 .brand-sys .bmark{grid-column:1/2;height:120px;width:auto;align-self:center;justify-self:center}

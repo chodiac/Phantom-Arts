@@ -349,6 +349,78 @@ gsap.set(media, {
   }
 
   /* =================================================================
+     02b  INTERAKTIVNA WEB ISKUSTVA — the node network reacts to you,
+     since that's the whole pitch of the category it illustrates.
+     desktop: the network drifts toward the cursor, lines redraw live.
+     everywhere (incl. touch): tapping/clicking fires a ripple burst.
+     ================================================================= */
+  function initInteractiveField() {
+    const field = $('.ix-field');
+    if (!field) return;
+    const nodeEls = $$('.ix-node', field);
+    const lineEls = $$('.ix-lines line', field);
+    const ring = $('.ix-ring', field);
+
+    const nodes = nodeEls.map((el, i) => {
+      const isCore = el.classList.contains('ix-core');
+      return {
+        el, isCore,
+        line: isCore ? null : lineEls[i],
+        rx: parseFloat(el.style.left), ry: parseFloat(el.style.top),
+        pull: isCore ? 0.12 : 0.3 + (i % 3) * 0.07, // slight per-node variety
+      };
+    });
+    const pos = nodes.map(n => ({ x: n.rx, y: n.ry }));
+
+    const place = i => {
+      const n = nodes[i], p = pos[i];
+      n.el.style.left = p.x + '%';
+      n.el.style.top = p.y + '%';
+      if (n.line) { n.line.setAttribute('x2', p.x); n.line.setAttribute('y2', p.y); }
+      if (n.isCore) {
+        lineEls.forEach(l => { l.setAttribute('x1', p.x); l.setAttribute('y1', p.y); });
+        if (ring) { ring.style.left = p.x + '%'; ring.style.top = p.y + '%'; }
+      }
+    };
+
+    const spawnRipple = (xPct, yPct) => {
+      const r = document.createElement('span');
+      r.className = 'ix-ripple';
+      r.style.left = xPct + '%';
+      r.style.top = yPct + '%';
+      field.appendChild(r);
+      r.addEventListener('animationend', () => r.remove());
+    };
+    const pointToPct = e => {
+      const r = field.getBoundingClientRect();
+      return { x: clamp(((e.clientX - r.left) / r.width) * 100, 0, 100),
+               y: clamp(((e.clientY - r.top) / r.height) * 100, 0, 100) };
+    };
+
+    if (!isTouch && !reduceMotion && hasGSAP) {
+      const tweens = nodes.map((n, i) => ({
+        x: gsap.quickTo(pos[i], 'x', { duration: 0.6, ease: 'power3', onUpdate: () => place(i) }),
+        y: gsap.quickTo(pos[i], 'y', { duration: 0.6, ease: 'power3', onUpdate: () => place(i) }),
+      }));
+      field.addEventListener('pointermove', e => {
+        const p = pointToPct(e);
+        nodes.forEach((n, i) => {
+          tweens[i].x(n.rx + (p.x - n.rx) * n.pull);
+          tweens[i].y(n.ry + (p.y - n.ry) * n.pull);
+        });
+      });
+      field.addEventListener('pointerleave', () => {
+        nodes.forEach((n, i) => { tweens[i].x(n.rx); tweens[i].y(n.ry); });
+      });
+    }
+
+    field.addEventListener('pointerdown', e => {
+      const p = pointToPct(e);
+      spawnRipple(p.x, p.y);
+    });
+  }
+
+  /* =================================================================
      03  SOCIAL SYSTEMS — one identity -> every format
      ================================================================= */
   function initSocial() {
@@ -678,6 +750,7 @@ v.setAttribute('playsinline', '');
     initHeroScene();
     initReveals();
     initCapabilities();
+    initInteractiveField();
     initSocial();
     initBuild();
     initWork();

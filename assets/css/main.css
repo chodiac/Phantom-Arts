@@ -966,10 +966,14 @@ body.has-cursor .cursor{display:block}
      each one's internal layout for a second aspect ratio. */
   .cap__stage{aspect-ratio:4/3}
   .scene{padding:20px}
-  .scene>.mini-browser,.scene>.shop-mock,.scene>.ix-field,
+  .scene>.mini-browser,.scene>.ix-field,
   .scene>.brand-sys,.scene>.feed-mock,.scene>.app-mock,.scene>.chat-mock{
     transform:scale(.72);
   }
+  /* shop-mock (2-row product grid + cart bar) is taller than the others
+     even scaled — at .72 it collides with the scene label above it, so
+     it gets its own smaller scale instead of the shared one. */
+  .scene>.shop-mock{transform:scale(.6)}
 
   /* the whole section is pinned to exactly 100vh while scrolling through
      it, so on short mobile screens every piece — heading, copy, stats and

@@ -864,6 +864,20 @@ body.has-cursor .cursor{display:block}
 .field textarea{resize:vertical;min-height:90px}
 .field select{appearance:none;background-image:linear-gradient(45deg,transparent 49%,var(--smoke) 51%),linear-gradient(-45deg,transparent 49%,var(--smoke) 51%);background-position:right 4px center,right 0 center;background-size:6px 6px;background-repeat:no-repeat}
 .field select option{background:var(--ink);color:var(--white)}
+.field input,.field textarea{caret-color:var(--signal)}
+/* browser autofill paints a pale-blue plate with dark text — repaint it
+   with the section's own dark ground so it stays on-theme */
+.field input:-webkit-autofill,
+.field input:-webkit-autofill:hover,
+.field input:-webkit-autofill:focus,
+.field textarea:-webkit-autofill,
+.field select:-webkit-autofill{
+  -webkit-text-fill-color:var(--white);
+  -webkit-box-shadow:0 0 0 1000px var(--ink) inset;
+  box-shadow:0 0 0 1000px var(--ink) inset;
+  caret-color:var(--white);
+  transition:background-color 9999s ease-out 0s;
+}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--signal)}
 .field input:user-invalid,.field textarea:user-invalid,.field select:user-invalid{border-color:#c8402f}
 

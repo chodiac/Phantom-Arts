@@ -607,17 +607,40 @@ gsap.set(media, {
     const form = $('#contactForm');
     const notice = $('[data-form-notice]');
     if (!form) return;
-    form.addEventListener('submit', e => {
+    const ENDPOINT = 'https://formsubmit.co/ajax/flowstate.srbija@gmail.com';
+    const btn = $('button[type="submit"]', form);
+    const say = (msg, cls) => {
+      notice.className = 'form__notice' + (cls ? ' ' + cls : '');
+      notice.textContent = msg;
+    };
+    form.addEventListener('submit', async e => {
       e.preventDefault();
-      notice.className = 'form__notice';
       if (!form.checkValidity()) {
-        notice.textContent = 'Dodaj ime, ispravan email, uslugu i poruku, pa probaj ponovo.';
-        notice.classList.add('is-err');
+        say('Dodaj ime, ispravan email, uslugu i poruku, pa probaj ponovo.', 'is-err');
         form.reportValidity();
         return;
       }
-      notice.textContent = 'Forma još nije povezana sa serverom - ništa nije poslato. Za sada nas potraži preko društvenih mreža.';
-      notice.classList.add('is-ok');
+      const data = Object.fromEntries(new FormData(form).entries());
+      data._subject = 'FLOWSTATE upit - ' + data.service + ' (' + data.name + ')';
+      data._template = 'table';
+      data._captcha = 'false';
+      btn.disabled = true;
+      say('Šaljem…');
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const out = await res.json().catch(() => ({}));
+        if (!res.ok || String(out.success) === 'false') throw new Error(out.message || res.status);
+        form.reset();
+        say('Hvala! Upit je poslat - javljamo se u roku od dva radna dana.', 'is-ok');
+      } catch (err) {
+        say('Slanje nije uspelo. Piši nam direktno na flowstate.srbija@gmail.com.', 'is-err');
+      } finally {
+        btn.disabled = false;
+      }
     });
   }
 
